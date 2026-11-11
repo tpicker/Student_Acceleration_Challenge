@@ -1,0 +1,64 @@
+STUDENT EXPLORER / COURSE-ONLY SOURCE NOTES
+
+This is a duplicate of the approved global explorer with country and U.S. state
+settings for course students. It introduces no outside data or empirical location
+assumptions. The original AI power model and energy calculation are retained.
+
+INPUTS RETAINED
+AI readiness categories and defaults: low 1-10 MW (default 5), medium 50-200 MW
+(default 100), high 500 MW-1+ GW (default 750). The original course readiness model
+is embedded verbatim, including input validation. Course AI horizon ranges remain
+5-10, 10-15, and 15-20 years. Custom MW outside the category range are identified.
+The horizon is not a construction schedule and is not shortened to four years.
+
+Technology capacity, investment ($M), and timing ranges: the same 13 technologies
+from the course technology energy calculator. Multiple units use independent,
+additive ranges as an illustration, not a factual scaling relationship. No shared
+cost or scale effects are assumed. Dollar ranges are not annual operating costs.
+AI investment is not added because its scope could overlap energy investment.
+
+Student Acceleration Challenge: the 16 countries, seven states, January 2027
+start, December 31, 2030 target, hypothetical 2027 SMR milestone, and advice choices.
+The milestone remains a course story premise, not a factual event or a guarantee.
+It does not override the course SMR range of 4-7 years.
+
+Country context: the existing country roadmap's ten factors and the existing
+country stakeholder app's nine roles. State context: the existing state roadmap's
+ten factors and state stakeholder app's 17 roles. Original source labels are kept.
+Country and state risk activities remain course tools; this app adds no risk score.
+The matching context links switch with the setting. State links retain addresses
+the user supplied in this course conversation, including the original course risk
+analysis address. No new publication address is assumed for a renamed state app.
+
+FORMULAS
+AI MW = sum(AI demand-unit count x MW/unit), using the original model's precision.
+The 2027-2030 course comparison assumes a full four-year window is available.
+Generation counts by default only if its entire course timing range is <=4 years.
+If the user enables earliest timing, options whose range starts within four years
+but extends beyond it also count. Options whose range starts later remain excluded.
+This is a coarse reference comparison, not a delivery or feasibility forecast.
+
+Lower nameplate gap = max(0, AI MW - upper counted generation MW).
+Upper nameplate gap = max(0, AI MW - lower counted generation MW).
+Existing state/country supply and existing demand are not represented. A zero gap
+does not establish dependable supply, grid headroom, or overall AI readiness.
+Storage MW and unsplit Solar + Storage MW remain separate from generation.
+No storage duration, energy equivalence, or generation/storage split is invented.
+Hydropower retains its open-ended upper capacity marker.
+
+Energy investment = sum(unit count x lower endpoint) to sum(unit count x upper
+endpoint) for the whole selected mix, including storage, hybrids, and later options.
+The optional MW x (365 x 24 hours) calculation is a full-load reference conversion
+to MWh, not an annual-use prediction or a supplied utilization assumption.
+
+NOT PROVIDED
+The inputs do not supply location electricity totals with matching years, capacity
+factors, utilization, electricity prices, operational constraints, or environmental
+rates. No actual annual electricity use, annual generation, electricity share,
+annual electricity cost, dependable supply gap, emissions, water totals, jobs, GDP,
+ROI, payback, or economic benefit forecast is added. Missing inputs are not zero.
+
+PROVENANCE
+course-reference-data.json contains the input snapshot, source-file hashes, course
+app links, and hashes of the global files preserved when making this duplicate.
+All reference values, decision factors, and roles come from the course apps.

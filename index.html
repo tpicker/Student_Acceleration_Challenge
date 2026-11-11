@@ -1,0 +1,625 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Student version of the 2030 Acceleration Challenge. Explore country or U.S. state AI readiness using the course apps, with editable scenarios, a live summary, and printable advice.">
+  <meta name="color-scheme" content="light">
+  <title>Student Explorer | The 2030 Acceleration Challenge</title>
+  <style>
+    :root{--navy:#153752;--navy-dark:#102b42;--blue:#246489;--ink:#19354a;--muted:#526b7d;--line:#cedbe5;--page:#f3f6f9;--paper:#fff;--soft:#edf4f9;--green:#23624e;--green-soft:#edf7f1;--amber:#80501c;--amber-soft:#fff5e6;--red:#9c303b;--radius:14px;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--ink);background:var(--page);font-size:16px;line-height:1.55}
+    *{box-sizing:border-box}body{margin:0}button,input,select,textarea{font:inherit}button,a,input,select,textarea{-webkit-tap-highlight-color:transparent}button{cursor:pointer}button:disabled{cursor:default}a{color:#185b87;text-underline-offset:3px}button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,summary:focus-visible{outline:3px solid #a46a13;outline-offset:3px}button{border:1px solid var(--line);border-radius:8px;background:var(--paper);color:var(--navy);min-height:44px;padding:10px 16px;font-size:.9rem;font-weight:600}button:hover{background:var(--soft)}button.primary{background:var(--navy);border-color:var(--navy);color:#fff}button.primary:hover{background:var(--navy-dark)}button.danger{background:var(--red);color:#fff;border-color:var(--red)}button.ghost{background:transparent}h1,h2,h3,p{margin:0}h1,h2,h3{line-height:1.2}h1{font-size:clamp(1.8rem,4vw,2.65rem);letter-spacing:-.035em;font-weight:700}h2{font-size:clamp(1.4rem,3vw,1.85rem);letter-spacing:-.025em}h3{font-size:1.15rem}strong{font-weight:650}p+p{margin-top:12px}ul,ol{padding-left:22px;margin:12px 0}li+li{margin-top:7px}[hidden]{display:none!important}.sr-only{position:absolute;width:1px;height:1px;padding:0;overflow:hidden;clip-path:inset(50%);white-space:nowrap}.skip-link{position:absolute;left:16px;top:-100px;z-index:5;background:#fff;padding:10px 14px}.skip-link:focus{top:12px}
+    .topbar{background:var(--navy-dark);color:#fff;padding:15px max(22px,calc((100vw - 1160px)/2));display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}.brand{font-size:.76rem;letter-spacing:.12em;font-weight:700}.topbar-context{font-size:.8rem;color:#d3e3ee}.container{width:min(1160px,calc(100% - 44px));margin:0 auto}.hero{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:24px;padding:34px 0 26px;align-items:start}.eyebrow{font-size:.75rem;color:var(--blue);letter-spacing:.1em;font-weight:700;margin-bottom:9px}.intro{margin-top:13px;max-width:730px;color:var(--muted)}.hero-actions{display:flex;align-items:center;flex-wrap:wrap;gap:9px;padding-top:3px}.deadline-line{display:flex;gap:10px 22px;flex-wrap:wrap;margin-top:18px;font-size:.82rem;color:var(--muted)}.deadline-line strong{color:var(--navy)}.project-bar{padding:20px 22px;background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:18px 24px}.field-label{display:block;font-size:.84rem;font-weight:650;margin-bottom:6px}.field-help{display:block;color:var(--muted);font-size:.79rem;margin-top:6px}input,textarea,select{width:100%;min-width:0;border:1px solid #b7cbd9;border-radius:7px;color:var(--ink);background:#fff;padding:10px 11px;min-height:44px}textarea{resize:vertical;line-height:1.5}input[aria-invalid="true"],select[aria-invalid="true"],textarea[aria-invalid="true"]{border-color:var(--red)}.draft-line{display:flex;justify-content:space-between;gap:8px 18px;flex-wrap:wrap;margin:9px 3px 24px;color:var(--muted);font-size:.78rem}.draft-line p{margin:0}.steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-bottom:22px}.step{display:flex;align-items:center;gap:12px;text-align:left;padding:14px 17px;background:var(--paper);font-weight:400}.step[aria-current="step"]{background:var(--navy);border-color:var(--navy);color:#fff}.step-number{display:flex;align-items:center;justify-content:center;border-radius:50%;background:var(--soft);color:var(--navy);width:30px;height:30px;flex:0 0 30px;font-size:.8rem;font-weight:700}.step[aria-current="step"] .step-number{background:#fff;color:var(--navy)}.step strong{display:block;font-size:.89rem}.step small{display:block;margin-top:2px;color:var(--muted);font-size:.75rem}.step[aria-current="step"] small{color:#dbe8f2}
+    .briefing{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:26px}.scene-subtitle{margin-top:10px;color:var(--muted);max-width:850px}.briefing-layout{display:grid;grid-template-columns:minmax(225px,.8fr) minmax(0,1.6fr);gap:22px;margin-top:24px;align-items:start}.topic-nav{display:grid;gap:10px}.topic{display:flex;align-items:center;gap:12px;text-align:left;padding:14px;font-weight:400}.topic[aria-pressed="true"]{background:var(--soft);border-color:var(--blue)}.topic-number{background:var(--navy);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;width:28px;height:28px;flex:0 0 28px;font-size:.8rem;font-weight:700}.topic-copy{min-width:0}.topic strong{display:block;font-size:.87rem}.topic small{display:block;margin-top:3px;color:var(--muted);font-size:.76rem}.detail{min-width:0;padding:22px;background:var(--page);border-radius:10px;min-height:300px}.detail .detail-label{font-size:.72rem;letter-spacing:.08em;font-weight:700;color:var(--muted);margin-bottom:10px}.detail h3{font-size:1.25rem;margin-bottom:14px}.detail p,.detail li{font-size:.93rem}.deadline-card{background:var(--paper);border-left:4px solid var(--blue);padding:12px 16px;margin:0 0 17px}.deadline-card small{display:block;color:var(--muted);font-size:.77rem}.deadline-card strong{font-size:1.25rem}.scene-footer{display:flex;align-items:center;justify-content:space-between;gap:15px;flex-wrap:wrap;margin-top:23px;padding-top:20px;border-top:1px solid var(--line)}.scene-footer p{color:var(--muted);font-size:.81rem;max-width:620px}.scene-actions{display:flex;flex-wrap:wrap;gap:8px}
+    .workspace{margin-top:27px}.workspace-heading{display:flex;align-items:start;justify-content:space-between;flex-wrap:wrap;gap:18px}.workspace-heading p{color:var(--muted);font-size:.88rem;margin-top:9px;max-width:750px}.word-note{color:var(--muted);font-size:.8rem;margin:13px 0 18px}.word-note.long{color:var(--amber)}.editors{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}.proposal-editor{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:22px;min-width:0}.proposal-editor h3{font-size:1.2rem;margin-bottom:6px}.scope-name{font-size:.85rem;color:var(--blue);margin-bottom:20px}.comparison-heading{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px;margin-bottom:8px;color:var(--muted);font-size:.76rem;font-weight:650}.metric{border-top:1px solid var(--line);padding-top:13px;margin-top:13px}.metric h4{font-size:.83rem;margin:0 0 8px;font-weight:650}.metric-pair{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.metric-pair label{font-size:.73rem;color:var(--muted)}.metric-pair input,.metric-pair textarea{margin-top:4px;font-size:.87rem}.metric-pair textarea{min-height:83px}.editor-field{margin-top:17px}.editor-field textarea{min-height:116px;font-size:.9rem}.editor-field select,.editor-field input{font-size:.89rem}.schedule-note{margin-top:9px;color:var(--muted);font-size:.79rem}.schedule-note.attention{padding:9px 11px;border-radius:6px;background:var(--amber-soft);color:var(--amber)}.review-panel{margin-top:22px;border:1px solid var(--line);border-radius:10px;padding:20px;background:var(--paper)}.review-panel h3{margin-bottom:9px}.review-panel p,.review-panel li{font-size:.87rem}.review-panel.good{border-color:#b4d5c6;background:var(--green-soft)}.review-columns{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}.review-columns ul{margin-bottom:0}.workspace-actions{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-top:22px}.workspace-actions p{font-size:.8rem;color:var(--muted);max-width:650px}.resource-note{margin:24px 0 0;padding:16px 0;border-top:1px solid var(--line);font-size:.8rem;color:var(--muted)}.resource-note summary{font-weight:600;cursor:pointer;color:var(--navy)}.resource-note ul{margin-bottom:0}.site-footer{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;padding:25px 0 30px;color:var(--muted);font-size:.76rem}.site-footer p{margin:0}.print-report{display:none}dialog{color:var(--ink);border:1px solid var(--line);border-radius:var(--radius);width:min(480px,calc(100% - 28px));padding:26px}dialog::backdrop{background:#102b4270}dialog h2{font-size:1.4rem;margin-bottom:13px}.dialog-actions{display:flex;justify-content:flex-end;gap:10px;flex-wrap:wrap;margin-top:24px}.no-script{margin:20px auto;padding:20px;background:#fff;border:1px solid var(--line);max-width:900px}
+    @media(max-width:950px){.hero{grid-template-columns:1fr;gap:17px}.hero-actions{padding:0}.briefing-layout{grid-template-columns:minmax(205px,.9fr) minmax(0,1.4fr)}.editors{grid-template-columns:1fr}.proposal-editor{padding:22px}.metric-pair input,.metric-pair textarea,.editor-field input,.editor-field select,.editor-field textarea{font-size:1rem}}
+    @media(max-width:620px){.container{width:calc(100% - 28px)}.topbar{padding:13px 16px}.hero{padding-top:25px}.project-bar{grid-template-columns:1fr;padding:17px}.steps{grid-template-columns:1fr;gap:7px}.step{padding:11px 13px}.step small{display:inline;margin-left:6px}.step strong{display:inline}.briefing{padding:20px 16px}.briefing-layout{grid-template-columns:1fr;gap:16px;margin-top:18px}.topic{padding:12px}.detail{padding:18px;min-height:0}.scene-footer{align-items:stretch}.scene-actions,.scene-actions button{flex:1 1 auto}.review-columns{grid-template-columns:1fr;gap:12px}.proposal-editor{padding:17px}.metric-pair{grid-template-columns:1fr}.metric-pair textarea{min-height:72px}.hero-actions button{flex:1 1 auto}.hero-actions{width:100%}input,textarea,select{font-size:16px}.workspace-actions>div{display:flex;flex-wrap:wrap;gap:8px}.comparison-heading{display:none}.site-footer{display:block}.site-footer p+p{margin-top:6px}}
+    @media(prefers-reduced-motion:no-preference){button{transition:background-color .12s,border-color .12s}}
+    @page{size:letter portrait;margin:.48in}
+    @media print{
+      html,body{background:#fff!important;color:#111!important;font-family:Arial,Helvetica,sans-serif;font-size:9.5pt;line-height:1.3}.screen-only,.skip-link,dialog,.no-script{display:none!important}.print-report{display:block!important}.print-heading{border-bottom:1.5pt solid #153752;padding-bottom:8pt;margin-bottom:9pt}.print-heading .print-kicker{font-size:7pt;letter-spacing:1pt;color:#344f65;margin-bottom:3pt}.print-heading h1{font-size:17pt;letter-spacing:-.3pt;color:#153752}.print-heading p{font-size:8pt;margin-top:4pt}.print-status{font-size:8pt;padding:5pt 0;margin:0 0 8pt}.print-status.draft{color:#8c3e16}.print-report h2{font-size:12pt;color:#153752;letter-spacing:0;margin:10pt 0 5pt;break-after:avoid}.print-report h3{font-size:9pt;margin:7pt 0 3pt}.print-report table{border-collapse:collapse;width:100%;table-layout:fixed;font-size:8.5pt;line-height:1.3}.print-report th,.print-report td{border:1px solid #b8c9d6;padding:4pt 5pt;text-align:left;vertical-align:top;overflow-wrap:anywhere;white-space:pre-wrap}.print-report th{background:#edf4f9!important;color:#153752}.print-report thead{display:table-header-group}.print-report tr{break-inside:avoid}.print-report th:first-child{width:24%}.print-report p{white-space:pre-wrap;overflow-wrap:anywhere;margin:0}.print-report .print-block{margin-top:6pt;break-inside:auto}.print-report .print-label{font-weight:bold}.print-report .print-basis{font-size:8pt;margin:4pt 0 6pt}.print-report .print-footnote{font-size:7.5pt;border-top:1px solid #cad6df;margin-top:10pt;padding-top:5pt}.print-report .print-schedule{font-size:8pt;margin-top:5pt}.print-report .missing-text{color:#666}a{color:inherit;text-decoration:none}
+    }
+  </style>
+  <style>/* The simplified flow retains the original app's palette, typeface, and controls. */
+.challenge-story{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;margin-bottom:28px}
+.story-card,.decision-flow,.recommendation-card{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:25px;min-width:0}
+.story-card h2{font-size:1.4rem;line-height:1.25;margin-bottom:14px}
+.story-card>p:not(.eyebrow){font-size:.94rem;color:var(--muted)}
+.story-card .story-emphasis{border-left:3px solid var(--blue);padding-left:13px;color:var(--navy)!important;margin-top:17px}
+.story-details{margin-top:18px;padding-top:13px;border-top:1px solid var(--line)}
+.story-details summary,.optional-note summary{cursor:pointer;color:var(--navy);font-weight:650;min-height:36px;line-height:1.5}
+.story-details p{font-size:.88rem;color:var(--muted);margin-top:10px}
+.reference-link{font-size:.8rem!important}
+.flow-heading h2{font-size:1.55rem;line-height:1.25}
+.flow-heading>p:not(.eyebrow){margin-top:10px;color:var(--muted);font-size:.93rem;max-width:850px}
+.decision-group{min-width:0;padding:20px 0 0;border:0;margin:22px 0 0;border-top:1px solid var(--line)}
+.decision-group legend{padding:0 0 6px;color:var(--navy);font-size:1.1rem;font-weight:650;line-height:1.4}
+.choice-options{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.choice-card{display:flex;align-items:flex-start;gap:11px;padding:16px;border:1px solid var(--line);border-radius:10px;background:var(--paper);cursor:pointer;min-width:0}
+.choice-card:hover{background:var(--soft)}
+.choice-card.selected{background:var(--soft);border-color:var(--blue);box-shadow:inset 0 0 0 1px var(--blue)}
+.choice-card input[type=radio]{width:18px;height:18px;min-height:18px;flex:0 0 18px;margin:3px 0 0;padding:0;accent-color:var(--blue)}
+.choice-card strong{display:block;font-size:.94rem;color:var(--navy);line-height:1.4}
+.choice-card small{display:block;margin-top:5px;font-size:.84rem;color:var(--muted);line-height:1.5}
+.choice-help{font-size:.83rem;color:var(--muted);margin-top:10px}
+.recommendation-card{margin-top:24px}
+.recommendation-summary{display:grid;gap:14px;margin:20px 0;padding:18px 20px;background:var(--soft);border-radius:10px}
+.recommendation-summary p{margin:0;font-size:.96rem;line-height:1.65}
+.recommendation-summary strong{color:var(--navy)}
+.recommendation-summary .unanswered{color:var(--muted)}
+.recommendation-location{font-size:.85rem!important;color:var(--muted);padding-bottom:10px;border-bottom:1px solid var(--line)}
+.optional-note{border-top:1px solid var(--line);padding-top:13px}
+.optional-note label{margin-top:10px}
+.optional-note textarea{min-height:100px}
+.reflection-prompt{margin-top:20px;color:var(--muted);font-size:.9rem;max-width:900px}
+@media(max-width:800px){.challenge-story{grid-template-columns:1fr}.choice-options{grid-template-columns:1fr}}
+@media(max-width:620px){.story-card,.decision-flow,.recommendation-card{padding:20px 17px}.challenge-story{gap:16px}.choice-card{padding:14px}.flow-heading h2{font-size:1.4rem}.recommendation-summary{padding:16px}.decision-group legend{font-size:1.03rem}}
+@media print{.print-report .print-choice{border-left:2pt solid #246489;padding-left:9pt;margin:10pt 0}.print-report .print-choice p{margin-top:4pt}.print-report .print-choice h2{font-size:11pt;margin:0 0 4pt}.print-report .print-intro{font-size:9pt;line-height:1.5;margin:8pt 0}.print-report .print-note{margin-top:14pt;line-height:1.55}}
+
+.explorer-panel{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:25px;margin-bottom:24px;min-width:0}
+.orientation{border-top:3px solid var(--navy)}
+.primer-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:23px;margin-top:22px}
+.primer-grid p{font-size:.88rem;color:var(--muted);margin:0}
+.primer-grid strong{display:block;color:var(--navy);margin-bottom:5px}
+.country-bar{margin-top:24px;align-items:center;grid-template-columns:minmax(220px,.8fr) minmax(0,1.4fr)}
+.country-help{font-size:.86rem;color:var(--muted)}
+.context-details summary,.examples summary,.calculation-details summary{font-weight:650;color:var(--navy);cursor:pointer;min-height:44px;padding:8px 0;line-height:1.5}
+.context-details{padding-top:13px;padding-bottom:13px}
+.context-grid,.missing-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px;padding-top:17px}
+.context-grid h3,.missing-grid h3{font-size:1rem;margin-bottom:11px}
+.context-grid p,.context-grid li,.missing-grid p{font-size:.86rem;color:var(--muted)}
+.context-grid ul{margin:14px 0 18px}
+.scenario-workspace{display:grid;grid-template-columns:minmax(0,1fr);gap:0;align-items:start}
+.workspace-content{min-width:0}
+.scenario-glance{min-width:0}
+.scenario-glance:focus-visible{outline:3px solid #a46a13;outline-offset:3px}
+.examples{margin-top:20px;padding:5px 14px;border:1px solid var(--line);border-radius:9px;background:var(--soft)}
+.examples-help{font-size:.85rem;color:var(--muted);padding:5px 0}
+.preset-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin:12px 0 14px}
+.customize{border-top:1px solid var(--line);margin-top:24px;padding-top:20px}
+.customize h3{font-size:1.2rem;margin:0 0 20px}
+.customize h4{font-size:1.05rem;font-weight:650;line-height:1.4;color:var(--navy);margin:18px 0 0}
+.current-mix{font-size:.81rem;color:var(--navy);background:var(--soft);padding:10px 12px;border-radius:7px;margin:12px 0 0;overflow-wrap:anywhere}
+.table-scroll{overflow:auto;max-width:100%;margin:15px 0 22px}
+.input-table,.calculation-table{border-collapse:collapse;width:100%;font-size:.86rem;text-align:left}
+.input-table caption,.calculation-table caption{text-align:left;font-size:.8rem;color:var(--muted);padding:0 0 10px}
+.input-table th,.input-table td,.calculation-table th,.calculation-table td{padding:11px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+.input-table thead,.calculation-table thead{background:var(--soft);color:var(--navy)}
+.input-table th{width:40%;font-weight:650}
+.input-table th small{display:block;font-weight:400;color:var(--muted);margin-top:3px}
+.input-table td{width:30%}
+.energy-inputs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 22px;margin-top:12px}
+.energy-unit{display:grid;grid-template-columns:minmax(0,1fr) 84px;gap:12px;align-items:center;border-bottom:1px solid var(--line);padding:13px 0}
+.energy-unit label{font-size:.85rem;font-weight:600;line-height:1.5}
+.energy-unit small{display:block;color:var(--muted);font-size:.77rem;font-weight:400;margin-top:3px}
+.timing-check{display:flex;align-items:flex-start;gap:12px;padding:17px;background:var(--soft);border-radius:9px;margin-top:23px;cursor:pointer;font-size:.89rem}
+.timing-check input{min-height:20px;width:20px;flex:0 0 20px;margin:3px 0 0;accent-color:var(--blue)}
+.timing-check small{display:block;color:var(--muted);margin-top:6px;line-height:1.6;font-size:.82rem}
+.input-errors{border-left:3px solid var(--red);background:#fff5f5;padding:13px 16px;margin-top:18px;font-size:.86rem;color:var(--red)}
+.input-errors ul{margin:8px 0 0}
+.results-header{margin:0 0 16px}
+.results-header h2{font-size:1.25rem}
+.results-header p{font-size:.8rem;color:var(--muted);margin-top:6px}
+.result-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.result-card{background:var(--soft);border:1px solid var(--line);border-radius:10px;padding:19px 18px;min-width:0}
+.result-card h3{font-size:.83rem;line-height:1.4;color:var(--navy);margin:0;min-height:2.8em}
+.result-value{font-size:clamp(1.4rem,2.5vw,1.9rem);font-weight:700;line-height:1.3;color:var(--navy);margin:12px 0!important;overflow-wrap:anywhere;letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+.result-card p:last-child{font-size:.78rem;line-height:1.55;color:var(--muted);margin:0}
+.result-caveat{font-size:.84rem;line-height:1.6;color:var(--muted);padding:15px 0 3px}
+.calculation-details{border-top:1px solid var(--line);margin-top:13px;padding-top:5px}
+.calculation-details h3{margin:17px 0 8px;font-size:1rem}
+.calculation-details p,.calculation-details li{font-size:.86rem;color:var(--muted)}
+.formula{border-left:3px solid var(--blue);padding:8px 14px;margin:12px 0;background:var(--soft);color:var(--navy)!important;font-variant-numeric:tabular-nums}
+.calculation-table{min-width:710px;font-size:.8rem}
+.calculation-table th:first-child{width:29%}
+.calculation-table small{display:block;color:var(--muted);margin-top:4px}
+.timing-badge{display:inline-block;border-radius:5px;padding:3px 7px;font-weight:600;font-size:.73rem;background:var(--soft);color:var(--navy);margin-top:5px}
+.timing-badge.conditional{background:var(--amber-soft);color:var(--amber)}
+.resource-note>p{font-size:.83rem;line-height:1.65;margin-top:12px}
+.resource-note summary{min-height:44px;padding:8px 0}
+.recommendation-summary .scenario-line{font-size:.86rem;color:var(--muted)}
+@media(min-width:1100px){.scenario-workspace{grid-template-columns:minmax(0,1fr) 310px;gap:24px}.workspace-content{grid-column:1;grid-row:1}.scenario-glance{grid-column:2;grid-row:1;position:sticky;top:18px;align-self:start;max-height:calc(100vh - 36px);max-height:calc(100dvh - 36px);overflow-y:auto;padding:20px;margin-bottom:24px;scrollbar-gutter:stable}.scenario-glance .result-grid{grid-template-columns:1fr;gap:10px}.scenario-glance .result-card{padding:14px}.scenario-glance .result-card h3{min-height:0}.scenario-glance .result-value{font-size:1.55rem;margin:8px 0!important}.scenario-glance .result-caveat{font-size:.77rem;padding:14px 0 0}.scenario-glance .results-header p:not(.eyebrow){font-size:.76rem}}
+@media(max-width:900px){.primer-grid{grid-template-columns:1fr;gap:15px}.primer-grid strong{display:inline}.result-grid{grid-template-columns:1fr}.result-card{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:7px 14px;align-items:start}.result-card h3{min-height:0}.result-card .result-value{margin:0!important;text-align:right}.result-card p:last-child{grid-column:1/-1}.country-bar{grid-template-columns:minmax(180px,.8fr) minmax(0,1.2fr)}}
+@media(max-width:620px){.explorer-panel{padding:20px 17px}.context-details{padding-top:10px;padding-bottom:10px}.context-grid,.missing-grid,.preset-grid,.energy-inputs,.country-bar{grid-template-columns:1fr;gap:18px}.preset-grid{margin-top:19px}.energy-inputs{gap:0}.context-grid{padding-top:15px}.input-table th,.input-table td{padding:9px 5px}.input-table th{width:38%;font-size:.8rem}.input-table input{padding:10px 7px}.result-card{padding:17px 14px}.result-value{font-size:1.38rem}.timing-check{padding:13px}.table-scroll{margin-left:-3px;margin-right:-3px}}
+@media print{.print-report .print-metrics{margin:9pt 0}.print-report .print-section{margin-top:12pt}.print-report .print-small{font-size:8pt;margin-top:6pt}.print-report .print-portfolio th:first-child{width:35%}.print-report .print-choice{break-inside:avoid}.print-report a{text-decoration:underline;overflow-wrap:anywhere}.print-report ul{font-size:8pt;margin:5pt 0}.print-report p+p{margin-top:6pt}.print-report h2{margin-top:11pt}.print-report .print-note p{white-space:pre-wrap}}
+</style>
+  <style>/* Only the setting selector layout is added; the approved explorer styles remain intact. */
+.setting-bar{grid-template-columns:minmax(145px,.65fr) minmax(190px,.9fr) minmax(0,1.45fr);align-items:center}
+@media(max-width:900px){.setting-bar{grid-template-columns:repeat(2,minmax(0,1fr))}.setting-bar .country-help{grid-column:1/-1}}
+@media(max-width:620px){.setting-bar{grid-template-columns:1fr}.setting-bar .country-help{grid-column:auto}}
+</style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to student explorer</a>
+  <div class="screen-only">
+    <header class="topbar"><span class="brand">AI ENERGY LAB / AI READINESS</span><span class="topbar-context">Student explorer · Course simulation</span></header>
+    <div class="container">
+      <section class="hero" aria-labelledby="app-title">
+        <div><p class="eyebrow">EXPLORE THE CHALLENGE</p><h1 id="app-title">The 2030 Acceleration Challenge</h1><p class="intro">How much AI readiness could your assigned country or U.S. state support—and how quickly? Bring forward your earlier course work, explore an energy scenario, and recommend a direction.</p><div class="deadline-line"><span>Imagine it is <strong>January 2027</strong></span><span>Leadership’s target <strong>December 31, 2030</strong></span></div></div>
+        <div class="hero-actions"><button type="button" id="print-button" class="primary">Print / Save PDF</button><button type="button" id="reset-button">Reset this scenario</button></div>
+      </section>
+      <main id="main">
+        <section class="explorer-panel orientation" aria-labelledby="orientation-title">
+          <div class="flow-heading"><p class="eyebrow">A SHORT ORIENTATION</p><h2 id="orientation-title">Think about readiness for your assigned setting</h2><p>You are advising on AI readiness for a country or U.S. state: the ability to support useful AI activity through energy, infrastructure, people, resources, and public support. Use the numbers to examine tradeoffs, then make your own judgment.</p></div>
+          <div class="primer-grid"><p><strong>AI levels describe scale.</strong> Low, medium, and high are the course’s power-demand categories. Counts represent a mix of these demand units across your assigned setting; you are estimating needs, not designing facilities.</p><p><strong>MW measures power.</strong> It describes a rate of electricity demand or rated supply. A technology’s nameplate MW is its rated capacity; it does not say how much dependable electricity it can deliver.</p><p><strong>Ranges invite comparison.</strong> Capacity, investment, and time ranges come from our course apps. They are teaching references, not location forecasts or quoted prices.</p></div>
+        </section>
+        <section class="project-bar setting-bar" aria-label="Your assigned setting">
+          <div><label class="field-label" for="scope">Your assigned setting</label><select id="scope" aria-describedby="setting-help"><option value="country">Country</option><option value="state">U.S. state</option></select></div>
+          <div><label class="field-label" for="location" id="location-label">Assigned country</label><select id="location" aria-describedby="setting-help"></select></div>
+          <p id="setting-help" class="country-help">Use the setting and location assigned in the simulation. Each location keeps its own scenario and advice. Course reference ranges are the same for every location; selection does not supply local statistics or a readiness score.</p>
+        </section>
+        <div class="draft-line"><p id="save-status" role="status">Your scenarios stay in this browser.</p><p>Only our course simulation apps supply the reference inputs.</p></div>
+        <details class="explorer-panel context-details"><summary>What should I consider for <span id="context-location">my assigned setting</span>?</summary><div class="context-grid"><div><h3 id="factor-heading">Use the country decision factors</h3><p>Consider which conditions support or constrain your recommendation. The matching roadmap provides these lenses, without assigning a location rating here.</p><ul id="factor-list"></ul><p><a id="context-roadmap-link" href="https://tpicker.github.io/Country_Decision_Factors_Roadmap/" target="_blank" rel="noopener noreferrer">Open the country decision factors roadmap <span class="sr-only">(new tab)</span></a></p></div><div><h3>Listen before making a judgment</h3><p>Consider views, influence, and interest using the stakeholder map for your assigned setting. Its representative roles are:</p><ul id="stakeholder-list"></ul><p><a id="context-stakeholder-link" href="https://tpicker.github.io/Country_Stakeholders_Mapping/" target="_blank" rel="noopener noreferrer">Open the country stakeholder map <span class="sr-only">(new tab)</span></a></p><p>Use the <a id="context-risk-link" href="https://tpicker.github.io/Country_AI_Readiness_Risk_Analysis/" target="_blank" rel="noopener noreferrer">country risk analysis <span class="sr-only">(new tab)</span></a> to explore likelihood, impact, and the conditions that could change your advice.</p></div></div></details>
+
+        <div class="scenario-workspace">
+          <aside id="scenario-glance" class="explorer-panel scenario-glance" aria-labelledby="glance-title" tabindex="0">
+            <div class="results-header"><p class="eyebrow">LIVE SUMMARY</p><h2 id="glance-title">Scenario at a glance</h2><p id="result-status" role="status" aria-live="polite"></p></div>
+            <div class="result-grid"><section class="result-card"><h3>AI power needed</h3><p class="result-value" id="demand-result">—</p><p>Sum of low, medium, and high demand units.</p></section><section class="result-card"><h3>Nameplate capacity gap to examine</h3><p class="result-value" id="gap-result">—</p><p>AI demand minus generation counted in the four-year comparison.</p></section><section class="result-card"><h3>Illustrative energy investment</h3><p class="result-value" id="cost-result">—</p><p>Whole selected energy mix, including later options. Course $ ranges; not an annual cost.</p></section></div>
+            <p class="result-caveat">A zero nameplate gap does not establish dependable supply, available grid capacity, or overall AI readiness. Storage and the unsplit Solar + Storage category are kept separate from generation.</p>
+          </aside>
+          <div class="workspace-content">
+        <section class="explorer-panel scenario-panel" aria-labelledby="scenario-title">
+          <div class="flow-heading"><p class="eyebrow">YOUR SCENARIO</p><h2 id="scenario-title">Build your AI and energy mix</h2><p>Use the customizer below to set AI demand and choose energy technologies. Your scenario summary updates as you make changes.</p></div>
+          <details id="examples" class="examples"><summary>See examples</summary><p class="examples-help">Choose an example to fill the customizer, then adjust the counts and MW below. These examples combine course inputs; they are not recommendations for the location selected.</p><div class="preset-grid"><div><label class="field-label" for="ai-preset">Load an AI demand example</label><select id="ai-preset"></select></div><div><label class="field-label" for="energy-preset">Load an energy mix example</label><select id="energy-preset"></select></div></div></details>
+          <section id="customize" class="customize" aria-labelledby="customizer-title">
+            <h3 id="customizer-title">Customize your scenario</h3>
+            <div id="input-errors" class="input-errors" role="status" aria-live="polite" hidden></div>
+            <h4>AI power demand across your assigned setting</h4><p class="field-help">Count the low, medium, and high demand units you want to explore. MW per unit can be changed independently. Custom values outside the course category are identified in the results.</p><p class="current-mix" id="ai-mix"></p>
+            <div class="table-scroll" role="region" aria-label="AI demand inputs" tabindex="0"><table class="input-table"><caption>Course AI categories and editable demand inputs</caption><thead><tr><th scope="col">AI level / course range</th><th scope="col">Number of units</th><th scope="col">MW per unit</th></tr></thead><tbody id="ai-inputs"></tbody></table></div>
+            <h4>Energy mix to compare</h4><p class="field-help">Choose any number of each technology type. Unit size, investment, and time ranges retain the course calculator’s values. Counts are comparison inputs rather than a construction plan.</p><p class="current-mix" id="energy-mix"></p>
+            <div id="energy-inputs" class="energy-inputs"></div>
+            <label class="timing-check" for="include-conditional"><input type="checkbox" id="include-conditional"><span><strong>Also test the earliest course timing</strong><small>Include generation options whose time range starts within four years but extends beyond it. This assumption may change the comparison; it does not establish delivery by 2030.</small></span></label>
+          </section>
+          <details class="calculation-details"><summary>See the calculations and timing assumptions</summary><div id="calculation-content"></div></details>
+          <details class="calculation-details"><summary>What else would an annual energy or cost estimate need?</summary><div class="missing-grid"><div><h3>Power is not annual energy</h3><p>Actual AI electricity use needs operating hours and utilization. Annual generation needs output over time, including capacity factors. The course apps do not supply those inputs.</p><p id="energy-reference"></p></div><div><h3>Location totals and annual costs</h3><p>An electricity share needs a matching electricity total and year for your assigned setting. Annual electricity costs need energy use and an appropriate electricity price. Dependable supply, emissions, and water totals need further operating and resource data.</p><p>These results are marked <strong>not provided by the course apps</strong>. No local electricity totals, prices, capacity factors, or environmental rates have been added.</p></div></div></details>
+        </section>
+
+        <div class="challenge-story">
+          <section class="story-card" aria-labelledby="new-brief-title"><p class="eyebrow">THE BRIEF HAS CHANGED</p><h2 id="new-brief-title">Can readiness move faster?</h2><p>New leadership wants your recommended level of AI readiness supported by the end of 2030. Consider the energy, water, infrastructure, workforce, and public support needed to make that credible.</p><p>You can keep your direction, adjust the scale or pace, revisit the energy mix, or combine changes. Use your scenario and the tools for your assigned setting to decide.</p><p class="story-emphasis">Your role is to recommend a credible path for AI readiness in your assigned setting. Your evidence may show that the target needs more time.</p></section>
+          <section class="story-card" aria-labelledby="energy-update-title"><p class="eyebrow">A NEW OPTION ENTERS THE DISCUSSION</p><h2 id="energy-update-title">Would an SMR change your advice?</h2><p><strong>For this simulation:</strong> in 2027, a selected small modular reactor (SMR) design completes demonstration testing and receives U.S. Nuclear Regulatory Commission design certification.</p><p>An SMR is a nuclear energy option. Consider whether this hypothetical milestone helps with the 2030 target, belongs in a later recommendation, or does not fit your energy mix.</p><details class="story-details"><summary>What does the milestone change in this explorer?</summary><p>The milestone is a story premise from the course challenge. It does not change the calculator’s 4–7-year course SMR range or establish that electricity will be available by 2030. Financing, resources, infrastructure, and the applicable approvals for your assigned setting remain part of your judgment.</p></details></section>
+        </div>
+        <form id="challenge-form" novalidate>
+          <section class="decision-flow" aria-labelledby="decision-title"><div class="flow-heading"><p class="eyebrow">YOUR ADVICE</p><h2 id="decision-title">What would you recommend?</h2><p>Make the choices that fit your scenario and the conditions you considered in the earlier course activities. The calculator supports your judgment; it does not grade or choose your response.</p></div>
+            <fieldset class="decision-group"><legend>How would you respond to the faster target?</legend><div class="choice-options" id="direction-options"></div></fieldset>
+            <fieldset class="decision-group"><legend>Where would the SMR option fit?</legend><div class="choice-options" id="smr-options"></div><p class="choice-help">Treat the SMR milestone as a simulation assumption. Ground your advice in what would be credible for your assigned setting.</p></fieldset>
+            <fieldset class="decision-group"><legend>How credible is the 2030 target?</legend><div class="choice-options" id="feasibility-options"></div></fieldset>
+          </section>
+          <section class="recommendation-card" aria-labelledby="recommendation-title"><div class="flow-heading"><p class="eyebrow">BRING IT TOGETHER</p><h2 id="recommendation-title">Your recommendation</h2><p id="recommendation-status" role="status" aria-live="polite"></p></div><div id="recommendation-summary" class="recommendation-summary"></div><details class="optional-note"><summary>Add a short note, if useful</summary><label class="field-label" for="note">What tradeoff, evidence, or condition matters most?</label><textarea id="note" rows="3" maxlength="1200" placeholder="Connect your advice to one important condition for your assigned setting."></textarea><p class="field-help">Optional · up to 1,200 characters</p></details><p class="reflection-prompt">You can print or save a draft at any time. Your summary includes the assigned setting and location, scenario inputs, calculations, assumptions, and advice.</p></section>
+        </form>
+        <details class="resource-note"><summary>Explore the course apps and source notes</summary><p>All reference values and decision tools in this copy come from the apps built for this course simulation. AI demand uses the course AI readiness calculator model; technology values use the technology energy calculator. No outside dataset is used.</p><ul id="course-links"></ul><p>The 2027–2030 comparison uses the challenge’s four-year window. It assumes the full window is available and does not account for prior progress, delivery constraints, or phased ramp-up. AI readiness horizon ranges remain separate from energy technology timing.</p></details>
+          </div>
+        </div>
+      </main>
+      <footer class="site-footer"><p>AI Energy Lab / Student Explorer</p><p>Saved in this browser. Nothing is submitted automatically.</p></footer>
+    </div>
+  </div>
+  <section class="print-report" id="print-report" aria-label="Printable student scenario and recommendation"></section>
+  <dialog id="reset-dialog" aria-labelledby="reset-title" aria-describedby="reset-description"><h2 id="reset-title">Reset this location’s scenario?</h2><p id="reset-description">This returns the current location to the starting examples and clears its advice and optional note. Your assigned setting, selected location, and other saved scenarios stay available.</p><div class="dialog-actions"><button type="button" id="cancel-reset">Keep working</button><button type="button" id="confirm-reset" class="danger">Reset scenario</button></div></dialog>
+  <p class="sr-only" id="activity-status" role="status" aria-live="polite"></p>
+  <noscript><div class="no-script">Enable JavaScript to explore your assigned scenario. This activity asks how a faster 2030 target and a hypothetical SMR milestone affect AI readiness for your country or U.S. state.</div></noscript>
+  <script>(function (root) {
+  "use strict";
+
+  const LEVELS = Object.freeze([
+    Object.freeze({ id: "low", label: "Low", power: "1–10 MW", minMW: 1, maxMW: 10, defaultMW: 5, investment: Object.freeze([100, 500]), benefit: Object.freeze([10, 50]), years: Object.freeze([5, 10]), openEnded: false }),
+    Object.freeze({ id: "medium", label: "Medium", power: "50–200 MW", minMW: 50, maxMW: 200, defaultMW: 100, investment: Object.freeze([1000, 5000]), benefit: Object.freeze([100, 500]), years: Object.freeze([10, 15]), openEnded: false }),
+    Object.freeze({ id: "high", label: "High", power: "500 MW–1+ GW", minMW: 500, maxMW: Infinity, defaultMW: 750, investment: Object.freeze([10000, 50000]), benefit: Object.freeze([500, 3000]), years: Object.freeze([15, 20]), openEnded: true })
+  ]);
+  const MAX_COUNT = 1000;
+  const MAX_MW = 1000000;
+  const numberFormatter = new Intl.NumberFormat("en-US", { maximumFractionDigits: 2 });
+  const preciseFormatter = new Intl.NumberFormat("en-US", { maximumFractionDigits: 5 });
+
+  function formatNumber(value) {
+    return numberFormatter.format(value);
+  }
+
+  function formatMoney(millions) {
+    if (millions >= 1000000) return "$" + preciseFormatter.format(millions / 1000000) + "T";
+    if (millions >= 1000) return "$" + formatNumber(millions / 1000) + "B";
+    return "$" + formatNumber(millions) + "M";
+  }
+
+  function formatGW(mw) {
+    return preciseFormatter.format(mw / 1000);
+  }
+
+  function formatRange(values, openEnded) {
+    return formatMoney(values[0]) + "–" + formatMoney(values[1]) + (openEnded ? "+" : "");
+  }
+
+  function createState(example) {
+    return {
+      version: 1,
+      facilities: Object.fromEntries(LEVELS.map(level => [level.id, { count: example ? (level.id === "low" ? 2 : level.id === "medium" ? 1 : 0) : 0, mw: level.defaultMW }])),
+      mode: "reference",
+      title: "",
+      rationale: ""
+    };
+  }
+
+  function parseValue(value) {
+    if ((typeof value !== "number" && typeof value !== "string") || String(value).trim() === "") return NaN;
+    return Number(value);
+  }
+
+  function validateFacilities(facilities) {
+    const errors = [];
+    const clean = {};
+    for (const level of LEVELS) {
+      const values = facilities && facilities[level.id];
+      const count = parseValue(values && values.count);
+      const mw = parseValue(values && values.mw);
+      if (!Number.isInteger(count) || count < 0 || count > MAX_COUNT) {
+        errors.push({ id: "count-" + level.id, message: level.label + ": enter a whole number of facilities from 0 to " + formatNumber(MAX_COUNT) + "." });
+      }
+      if (!Number.isFinite(mw) || mw < 0.01 || mw > MAX_MW || Math.abs(mw * 100 - Math.round(mw * 100)) > 0.00001) {
+        errors.push({ id: "mw-" + level.id, message: level.label + ": enter MW from 0.01 to " + formatNumber(MAX_MW) + ", with up to two decimal places." });
+      }
+      clean[level.id] = { count, mw };
+    }
+    return { valid: errors.length === 0, errors, facilities: clean };
+  }
+
+  function outsideReference(level, mw) {
+    return mw < level.minMW || mw > level.maxMW;
+  }
+
+  function calculate(facilities) {
+    const validation = validateFacilities(facilities);
+    if (!validation.valid) throw new RangeError(validation.errors.map(error => error.message).join(" "));
+    const rows = LEVELS.map(level => {
+      const values = validation.facilities[level.id];
+      return { level, count: values.count, mw: values.mw, totalMW: Math.round(values.count * values.mw * 100) / 100, outsideReference: outsideReference(level, values.mw) };
+    });
+    const selected = rows.filter(row => row.count > 0);
+    return {
+      rows,
+      count: rows.reduce((total, row) => total + row.count, 0),
+      totalMW: Math.round(rows.reduce((total, row) => total + row.totalMW, 0) * 100) / 100,
+      investment: [0, 1].map(endpoint => rows.reduce((total, row) => total + row.count * row.level.investment[endpoint], 0)),
+      benefit: [0, 1].map(endpoint => rows.reduce((total, row) => total + row.count * row.level.benefit[endpoint], 0)),
+      years: selected.length ? [Math.min(...selected.map(row => row.level.years[0])), Math.max(...selected.map(row => row.level.years[1]))] : null,
+      openEnded: selected.some(row => row.level.openEnded)
+    };
+  }
+
+  function buildSummary(state) {
+    const result = calculate(state.facilities);
+    const lines = ["AI READINESS & ECONOMIC DEVELOPMENT — DECISION SUMMARY", "Course simulation", "", "Decision: " + (state.title.trim() || "My regional AI readiness plan"), "", "FACILITY MIX"];
+    for (const row of result.rows) {
+      lines.push(row.level.label + ": " + formatNumber(row.count) + " " + (row.count === 1 ? "facility" : "facilities") + " × " + formatNumber(row.mw) + " MW = " + formatNumber(row.totalMW) + " MW" + (row.count > 0 && row.outsideReference ? " (custom MW outside course reference)" : ""));
+    }
+    lines.push("Total: " + formatNumber(result.count) + " " + (result.count === 1 ? "facility" : "facilities") + "; " + formatNumber(result.totalMW) + " MW (" + formatGW(result.totalMW) + " GW).", "This is power capacity, not annual energy use or an overall readiness score.", "", "COURSE REFERENCES FOR SELECTED LEVELS (per facility; USD)");
+    for (const row of result.rows.filter(row => row.count > 0)) {
+      lines.push(row.level.label + ": " + row.level.power + "; investment " + formatRange(row.level.investment, row.level.openEnded) + "; " + row.level.years.join("–") + " years; annual economic benefit " + formatRange(row.level.benefit, row.level.openEnded) + "/year.");
+    }
+    if (!result.count) lines.push("No facilities selected.");
+    if (state.mode === "illustration") {
+      lines.push("", "INDICATIVE PORTFOLIO ILLUSTRATION — NOT A FORECAST");
+      if (result.count) {
+        lines.push("Capital investment: " + formatRange(result.investment, result.openEnded) + ".", "Annual economic benefit: " + formatRange(result.benefit, result.openEnded) + "/year.");
+      } else {
+        lines.push("No economic illustration: no facilities selected.");
+      }
+      lines.push("Assumption: multiply each level's dollar endpoints by its count, then add across levels. This assumes independent, additive facilities; actual effects may overlap or be constrained. It does not establish linear economic scaling with facility count or MW.");
+      if (result.openEnded) lines.push("High-level upper values are open-ended. The upper dollar figures are reference markers, not ceilings; '+' is preserved in totals.");
+    } else {
+      lines.push("", "Economic view: course references only; no portfolio dollar totals requested.");
+    }
+    if (result.years) lines.push("Course time-horizon span: " + result.years.join("–") + " years across selected levels. This is not a combined construction schedule; horizons are not added.");
+    lines.push("", "MY RATIONALE & TRADE-OFFS", state.rationale.trim() || "Not yet provided.", "", "SOURCE & LIMITS", "Source: user-provided course table, not independently validated. Readiness levels are course categories, not certifications. MW changes affect capacity only; dollar ranges remain tied to the course level. 'Annual economic benefit' is not defined as revenue, profit, tax receipts, or net benefit. Price year, inflation, discount rate, and benefit attribution are unspecified. No ROI, payback, or cumulative benefit is calculated.");
+    return lines.join("\n");
+  }
+
+  function validateSavedState(candidate) {
+    if (!candidate || candidate.version !== 1 || !["reference", "illustration"].includes(candidate.mode) || typeof candidate.title !== "string" || candidate.title.length > 120 || typeof candidate.rationale !== "string" || candidate.rationale.length > 6000) return null;
+    const validation = validateFacilities(candidate.facilities);
+    if (!validation.valid) return null;
+    return { version: 1, facilities: validation.facilities, mode: candidate.mode, title: candidate.title, rationale: candidate.rationale };
+  }
+
+  const model = Object.freeze({ LEVELS, MAX_COUNT, MAX_MW, formatNumber, formatMoney, formatGW, formatRange, createState, validateFacilities, outsideReference, calculate, buildSummary, validateSavedState });
+  root.ReadinessModel = model;
+  if (typeof module !== "undefined" && module.exports) module.exports = model;
+})(typeof globalThis !== "undefined" ? globalThis : window);
+
+const COURSE_DATA={"countries": ["Algeria", "Brazil", "Costa Rica", "France", "Ireland", "Japan", "Jordan", "Kenya", "Mexico", "Morocco", "Oman", "Pakistan", "South Korea", "Ukraine", "Venezuela", "Vietnam"], "technologies": [{"name": "Natural Gas (Combined Cycle)", "size": "200-800 MW", "minMW": 200, "maxMW": 800, "minCost": 200, "maxCost": 1300, "minYears": 2, "maxYears": 4, "kind": "generation"}, {"name": "Natural Gas Peaker", "size": "50-200 MW", "minMW": 50, "maxMW": 200, "minCost": 35, "maxCost": 240, "minYears": 1, "maxYears": 3, "kind": "generation"}, {"name": "Coal Plant", "size": "500-1,000 MW", "minMW": 500, "maxMW": 1000, "minCost": 5000, "maxCost": 10000, "minYears": 5, "maxYears": 10, "kind": "generation"}, {"name": "Nuclear (Large)", "size": "1,000-1,600 MW", "minMW": 1000, "maxMW": 1600, "minCost": 10000, "maxCost": 20000, "minYears": 8, "maxYears": 15, "kind": "generation"}, {"name": "Small Modular Reactor (SMR)", "size": "50-300 MW", "minMW": 50, "maxMW": 300, "minCost": 300, "maxCost": 3000, "minYears": 4, "maxYears": 7, "kind": "generation"}, {"name": "Solar PV (Utility)", "size": "50-300 MW", "minMW": 50, "maxMW": 300, "minCost": 80, "maxCost": 1200, "minYears": 1, "maxYears": 2, "kind": "generation"}, {"name": "Solar + Storage", "size": "100-500 MW", "minMW": 100, "maxMW": 500, "minCost": 200, "maxCost": 2500, "minYears": 1, "maxYears": 3, "kind": "hybrid"}, {"name": "Onshore Wind", "size": "100-300 MW", "minMW": 100, "maxMW": 300, "minCost": 170, "maxCost": 1100, "minYears": 2, "maxYears": 4, "kind": "generation"}, {"name": "Offshore Wind", "size": "300-1,000 MW", "minMW": 300, "maxMW": 1000, "minCost": 2500, "maxCost": 9000, "minYears": 5, "maxYears": 10, "kind": "generation"}, {"name": "Hydropower (Large Dam)", "size": "100-1,000+ MW", "minMW": 100, "maxMW": 1000, "minCost": 250, "maxCost": 16000, "minYears": 5, "maxYears": 10, "kind": "generation"}, {"name": "Geothermal", "size": "20-100 MW", "minMW": 20, "maxMW": 100, "minCost": 40, "maxCost": 500, "minYears": 3, "maxYears": 6, "kind": "generation"}, {"name": "Biomass / Waste-to-Energy", "size": "20-100 MW", "minMW": 20, "maxMW": 100, "minCost": 80, "maxCost": 500, "minYears": 3, "maxYears": 5, "kind": "generation"}, {"name": "Battery Storage (grid-scale)", "size": "50-300 MW", "minMW": 50, "maxMW": 300, "minCost": 65, "maxCost": 400, "minYears": 1, "maxYears": 2, "kind": "storage"}], "countryFactors": ["National Economic Impact & Growth Potential", "Global Competitiveness & Market Demand", "Talent & Workforce Availability", "Policy & Regulatory Support", "Infrastructure & Technology Readiness", "Investment & Capital Availability", "Industry Ecosystem & Partnerships", "Social Impact & Ethical Considerations", "Sustainability & Environmental Impact", "National Security & Strategic Priority"], "stakeholders": [{"id": "city", "name": "Local City Representative", "shortName": "Local city"}, {"id": "water", "name": "Water Representative", "shortName": "Water"}, {"id": "utilities", "name": "Utilities Representative", "shortName": "Utilities"}, {"id": "grid", "name": "Grid Operations Representative", "shortName": "Grid operations"}, {"id": "energy-office", "name": "Energy Office Representative", "shortName": "Energy office"}, {"id": "google", "name": "Google Representative", "shortName": "Google"}, {"id": "apple", "name": "Apple Representative", "shortName": "Apple"}, {"id": "microsoft", "name": "Microsoft Representative", "shortName": "Microsoft"}, {"id": "nvidia", "name": "Nvidia Representative", "shortName": "Nvidia"}], "windowYears": 4, "hoursPerReferenceYear": 8760, "sources": [{"id": "readiness", "file": "outputs/ai-readiness-calculator/model.js", "sha256": "184dd79c80df99d35a1939a5859b74495a4c661a1d4cf12b8b0a2a66934a80ca"}, {"id": "energy", "file": "outputs/ai-technology-energy-calculator.html", "sha256": "1b937ddac21535298c02071341d4eaf6c93ac0a064c6432432275c5b1acc543f"}, {"id": "student", "file": "outputs/Acceleration_Challenge/index.html", "sha256": "f74730811dc59fc82c4082fb3a120925534517bb50f346395e79bdea89b879aa"}, {"id": "roadmap", "file": "outputs/Country_Decision_Factors_Roadmap/index.html", "sha256": "b2bebd1a414d617e794b9a6acd776e66243c3676bdddafcec2fd6b79becaf0fd"}, {"id": "stakeholders", "file": "outputs/Country_Stakeholders_Mapping.html", "sha256": "bde6964c213c218930bdd4ad9424bd81c6917192a7b89997debd595f23d621c0"}, {"id": "stateRoadmap", "file": "outputs/ai-decision-roadmaps/state/index.html", "sha256": "1844d34093d7bebe053edaa43bb2454bfd5b4acf94b6d0c2580f5bdf05436eef"}, {"id": "stateStakeholders", "file": "outputs/state-stakeholder-network-map/index.html", "sha256": "2f85ab697ebf363c98b192c81231884ba5cd26d03ad08a9b1fd7407a95ff5b4f"}, {"id": "stateRisk", "file": "outputs/ai-risk-analysis-separated/state/index.html", "sha256": "c7dada1d89c14e664e8c271e61eb9db6ecd3cb1d87474f5d439cbac5a8cfb1fe"}], "links": [{"label": "Energy technologies resource guide", "url": "https://tpicker.github.io/AI_Energy_Technologies/"}, {"label": "Technology energy calculator", "url": "https://tpicker.github.io/AI_Technology_Energy_Calculator/"}, {"label": "Country decision factors roadmap", "url": "https://tpicker.github.io/Country_Decision_Factors_Roadmap/"}, {"label": "Country stakeholder map", "url": "https://tpicker.github.io/Country_Stakeholders_Mapping/"}, {"label": "Country AI readiness risk analysis", "url": "https://tpicker.github.io/Country_AI_Readiness_Risk_Analysis/"}, {"label": "Student acceleration challenge", "url": "https://tpicker.github.io/Acceleration_Challenge/"}], "limits": "Course simulation values only. No national electricity statistics, capacity factors, delivered electricity prices, emissions factors, or water-use factors are provided by these inputs.", "states": ["Colorado", "Connecticut", "Maryland", "New York", "South Dakota", "Texas", "West Virginia"], "stateFactors": ["Economic Development Potential", "State Policy & Education System", "Existing Industry Strength & Synergies", "Infrastructure & Digital Readiness", "Cost of Doing Business & Incentives", "Innovation Ecosystem & Research Assets", "Access to Capital & Funding", "Workforce Diversity & Skills", "Sustainability & Community Impact", "Risk & Resilience Factors"], "stateStakeholders": [{"id": "state-energy", "name": "State Energy Official", "shortName": "State energy"}, {"id": "governor", "name": "Governor's Representative", "shortName": "Governor"}, {"id": "doe", "name": "US DOE Official", "shortName": "US DOE"}, {"id": "microsoft", "name": "Microsoft Representative", "shortName": "Microsoft"}, {"id": "google", "name": "Google Representative", "shortName": "Google"}, {"id": "apple", "name": "Apple Representative", "shortName": "Apple"}, {"id": "nvidia", "name": "Nvidia Representative", "shortName": "Nvidia"}, {"id": "epa", "name": "EPA Representative", "shortName": "EPA"}, {"id": "tribal-nation", "name": "Tribal Nation Representative", "shortName": "Tribal Nation"}, {"id": "sierra-club", "name": "Sierra Club Representative", "shortName": "Sierra Club"}, {"id": "greenpeace", "name": "Greenpeace Representative", "shortName": "Greenpeace"}, {"id": "water", "name": "Water Representative", "shortName": "Water"}, {"id": "waste", "name": "Waste Representative", "shortName": "Waste"}, {"id": "grid", "name": "Grid Operations Representative", "shortName": "Grid operations"}, {"id": "labor", "name": "Labor Union Representative", "shortName": "Labor union"}, {"id": "city", "name": "Local City Representative", "shortName": "Local city"}, {"id": "utilities", "name": "Elec Utilities Representative", "shortName": "Electric utilities"}], "stateLinks": [{"label": "State decision factors roadmap", "url": "https://tpicker.github.io/AI_Decisions_Factors_Roadmap/"}, {"label": "State stakeholder map", "url": "https://tpicker.github.io/State_Stakeholder_Priorities_Engagement_Plan/"}, {"label": "Course risk analysis", "url": "https://tpicker.github.io/AI_facility_risk_analysis/"}], "preservedFiles": [{"file": "outputs/Acceleration_Challenge_Country_Explorer/index.html", "sha256": "4c6abad93bfae1856828d37ddb6de79f72cbd3a3fed247f826aa66b43e60fc59"}, {"file": "outputs/Acceleration_Challenge_Country_Explorer.zip", "sha256": "78e7cde042927559963a804d0a4fe81c13490bd03d40050e455fc4170055e9c7"}]};
+const CHOICES={
+  direction:{heading:'Response to the faster target',options:[
+    {id:'keep',label:'Keep the current direction',hint:'Your selected AI-demand scenario and energy choices still fit the evidence.',advice:'Keep the current AI readiness direction and energy choices.'},
+    {id:'pace',label:'Adjust the scale or pace',hint:'Support a smaller initial level of AI readiness or phase progress over time.',advice:'Adjust the scale or pace of AI readiness, with a smaller initial level or a phased approach.'},
+    {id:'energy',label:'Revisit the energy mix',hint:'Change the energy choices that would support your readiness goals.',advice:'Revisit the energy mix supporting the AI readiness recommendation.'},
+    {id:'both',label:'Combine changes',hint:'Adjust both the readiness ambition and the energy choices supporting it.',advice:'Adjust both the scale or pace of AI readiness and the supporting energy mix.'}
+  ]},
+  smr:{heading:'Role of the SMR option',options:[
+    {id:'target',label:'Consider it for the 2030 target',hint:'This would need credible evidence that the remaining conditions can be met.',advice:'Consider SMRs for the 2030 target, conditional on credible evidence that the remaining requirements can be met.'},
+    {id:'later',label:'Keep it as a later option',hint:'Consider future use while supporting the 2030 recommendation with other energy choices.',advice:'Keep SMRs as a later option and use other energy choices to support the 2030 recommendation.'},
+    {id:'exclude',label:'Leave it out of this recommendation',hint:'The evidence favors other energy choices for your assigned setting.',advice:'Leave SMRs out of this recommendation and prioritize other energy choices.'}
+  ]},
+  feasibility:{heading:'Judgment about the target',options:[
+    {id:'credible',label:'The target is credible',hint:'The evidence supports the readiness level and energy mix you recommend.',advice:'The 2030 target is credible for the AI readiness level and energy mix recommended.'},
+    {id:'conditional',label:'It depends on key conditions',hint:'Identify the most important condition when explaining your recommendation.',advice:'The 2030 target is credible only if the key conditions identified in the recommendation are met.'},
+    {id:'later',label:'The evidence points to more time',hint:'Explain why the 2030 target is not credible for the readiness level you recommend.',advice:'The evidence points to more time; the 2030 target is not credible for the AI readiness level recommended.'}
+  ]}
+};
+
+'use strict';
+const ExplorerModel=(()=>{
+  const data=COURSE_DATA;
+  const demandModel=ReadinessModel;
+  const clone=value=>JSON.parse(JSON.stringify(value));
+  const settings={
+    country:{label:'Assigned country',noun:'country',placeholder:'Choose a country',locations:data.countries,factors:data.countryFactors,stakeholders:data.stakeholders,links:data.links.slice(2,5)},
+    state:{label:'Assigned U.S. state',noun:'state',placeholder:'Choose a state',locations:data.states,factors:data.stateFactors,stakeholders:data.stateStakeholders,links:data.stateLinks}
+  };
+  const demandPresets={
+    small:{label:'Smaller demand example',counts:{low:2,medium:0,high:0}},
+    course:{label:'Readiness calculator example',counts:{low:2,medium:1,high:0}},
+    larger:{label:'Larger mixed-demand example',counts:{low:2,medium:1,high:1}}
+  };
+  const energyPresets={
+    mixed:{label:'Gas, solar, and battery example',names:['Natural Gas (Combined Cycle)','Solar PV (Utility)','Battery Storage (grid-scale)']},
+    renewable:{label:'Solar, wind, and battery example',names:['Solar PV (Utility)','Onshore Wind','Battery Storage (grid-scale)']},
+    smr:{label:'SMR comparison example',names:['Small Modular Reactor (SMR)','Solar PV (Utility)','Battery Storage (grid-scale)']},
+    blank:{label:'Start with no energy selection',names:[]}
+  };
+  function demandFor(id){
+    const preset=demandPresets[id]??demandPresets.course;
+    return Object.fromEntries(demandModel.LEVELS.map(level=>[level.id,{count:preset.counts[level.id],mw:level.defaultMW}]));
+  }
+  function energyFor(id){const names=energyPresets[id]?.names??energyPresets.mixed.names;return data.technologies.map(tech=>names.includes(tech.name)?1:0);}
+  function blankAdvice(){return {direction:'',smr:'',feasibility:'',note:''};}
+  function createCase(template){return {aiPreset:template?.aiPreset??'course',energyPreset:template?.energyPreset??'mixed',ai:clone(template?.ai??demandFor('course')),quantities:[...(template?.quantities??energyFor('mixed'))],includeConditional:template?.includeConditional??false,...blankAdvice()};}
+  function createDraft(){return {version:1,scope:'country',locations:{country:'',state:''},cases:{country:{'':createCase()},state:{'':createCase()}}};}
+  function currentCase(draft){return draft.cases[draft.scope][draft.locations[draft.scope]];}
+  function choice(field,value){return Object.hasOwn(CHOICES,field)?CHOICES[field].options.find(option=>option.id===value)??null:null;}
+  function validQuantity(value){return Number.isInteger(value)&&value>=0&&value<=9999;}
+  function normalizeCase(candidate){
+    const fresh=createCase();
+    if(!candidate||typeof candidate!=='object')return fresh;
+    const checked=demandModel.validateFacilities(candidate.ai);
+    if(checked.valid)fresh.ai=checked.facilities;
+    if(Array.isArray(candidate.quantities)&&candidate.quantities.length===data.technologies.length)fresh.quantities=candidate.quantities.map(value=>validQuantity(value)?value:0);
+    fresh.aiPreset=Object.hasOwn(demandPresets,candidate.aiPreset)?candidate.aiPreset:'custom';
+    if(fresh.aiPreset!=='custom'&&JSON.stringify(fresh.ai)!==JSON.stringify(demandFor(fresh.aiPreset)))fresh.aiPreset='custom';
+    fresh.energyPreset=Object.hasOwn(energyPresets,candidate.energyPreset)?candidate.energyPreset:'custom';
+    if(fresh.energyPreset!=='custom'&&JSON.stringify(fresh.quantities)!==JSON.stringify(energyFor(fresh.energyPreset)))fresh.energyPreset='custom';
+    fresh.includeConditional=candidate.includeConditional===true;
+    for(const field of Object.keys(CHOICES))if(choice(field,candidate[field]))fresh[field]=candidate[field];
+    if(typeof candidate.note==='string')fresh.note=candidate.note.slice(0,1200);
+    return fresh;
+  }
+  function normalizeDraft(candidate){
+    const fresh=createDraft();
+    if(!candidate||candidate.version!==1||!candidate.cases)return fresh;
+    if(Object.hasOwn(settings,candidate.scope))fresh.scope=candidate.scope;
+    for(const [scope,setting] of Object.entries(settings)){
+      const savedCases=candidate.cases[scope];
+      if(savedCases&&typeof savedCases==='object')for(const location of ['',...setting.locations])if(Object.hasOwn(savedCases,location))fresh.cases[scope][location]=normalizeCase(savedCases[location]);
+      const location=candidate.locations?.[scope];
+      if(setting.locations.includes(location))fresh.locations[scope]=location;
+      if(!Object.hasOwn(fresh.cases[scope],fresh.locations[scope]))fresh.cases[scope][fresh.locations[scope]]=createCase();
+    }
+    return fresh;
+  }
+  function changeScope(draft,scope){
+    if(!Object.hasOwn(settings,scope))return false;
+    draft.scope=scope;return true;
+  }
+  function changeLocation(draft,location){
+    const scope=draft.scope;
+    if(location!==''&&!settings[scope].locations.includes(location))return false;
+    if(!Object.hasOwn(draft.cases[scope],location))draft.cases[scope][location]=createCase(currentCase(draft));
+    draft.locations[scope]=location;return true;
+  }
+  function calculate(plan){
+    const demand=demandModel.calculate(plan.ai);
+    if(!Array.isArray(plan.quantities)||plan.quantities.length!==data.technologies.length||!plan.quantities.every(validQuantity))throw new RangeError('Use whole energy-unit counts from 0 to 9,999.');
+    const totals={generation:{minimum:0,maximum:0,openMaximum:false},storage:{minimum:0,maximum:0},hybrid:{minimum:0,maximum:0}};
+    const windowGeneration={minimum:0,maximum:0,openMaximum:false};
+    const conditionalGeneration={minimum:0,maximum:0};
+    let minimumCost=0,maximumCost=0,minimumYears=0,maximumYears=0;
+    const selected=[];
+    data.technologies.forEach((tech,index)=>{
+      const quantity=plan.quantities[index];if(!quantity)return;
+      const timing=tech.maxYears<=data.windowYears?'window':tech.minYears<=data.windowYears?'conditional':'later';
+      const included=timing==='window'||(timing==='conditional'&&plan.includeConditional);
+      const minimum=tech.minMW*quantity,maximum=tech.maxMW*quantity;
+      totals[tech.kind].minimum+=minimum;totals[tech.kind].maximum+=maximum;
+      if(tech.kind==='generation'){
+        totals.generation.openMaximum||=tech.size.includes('+');
+        if(included){windowGeneration.minimum+=minimum;windowGeneration.maximum+=maximum;windowGeneration.openMaximum||=tech.size.includes('+');}
+        if(timing==='conditional'){conditionalGeneration.minimum+=minimum;conditionalGeneration.maximum+=maximum;}
+      }
+      minimumCost+=tech.minCost*quantity;maximumCost+=tech.maxCost*quantity;
+      minimumYears=Math.max(minimumYears,tech.minYears);maximumYears=Math.max(maximumYears,tech.maxYears);
+      selected.push({index,tech,quantity,timing,included,minimum,maximum,minimumCost:tech.minCost*quantity,maximumCost:tech.maxCost*quantity});
+    });
+    return {demand,totals,windowGeneration,conditionalGeneration,selected,minimumCost,maximumCost,minimumYears,maximumYears,
+      gap:{minimum:windowGeneration.openMaximum?0:Math.max(0,demand.totalMW-windowGeneration.maximum),maximum:Math.max(0,demand.totalMW-windowGeneration.minimum)},
+      fullLoadReferenceMWh:demand.totalMW*data.hoursPerReferenceYear,
+      nationalDemandShare:null,annualGeneration:null,annualEnergyCost:null,dependableSupplyGap:null,emissions:null,waterConsumption:null};
+  }
+  return Object.freeze({data,demandModel,settings,demandPresets,energyPresets,demandFor,energyFor,blankAdvice,createCase,createDraft,currentCase,choice,validQuantity,normalizeCase,normalizeDraft,changeScope,changeLocation,calculate});
+})();
+
+'use strict';
+const STORAGE_KEY='ai-readiness-student-explorer-v1';
+const $=id=>document.getElementById(id);
+const escapeHTML=value=>String(value??'').replace(/[&<>"']/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
+const n=ReadinessModel.formatNumber;
+const money=ReadinessModel.formatMoney;
+const range=(minimum,maximum,open=false)=>n(minimum)+(minimum===maximum?'':'–'+n(maximum))+(open?'+':'');
+const mwRange=values=>range(values.minimum,values.maximum,values.openMaximum)+' MW';
+const costRange=result=>money(result.minimumCost)+(result.minimumCost===result.maximumCost?'':'–'+money(result.maximumCost));
+let draft=ExplorerModel.createDraft();
+let pendingErrors=[];
+const current=()=>ExplorerModel.currentCase(draft);
+const setting=()=>ExplorerModel.settings[draft.scope];
+const selectedLocation=()=>draft.locations[draft.scope];
+const courseLinks=()=>[...COURSE_DATA.links.slice(0,2),...setting().links,COURSE_DATA.links[5]];
+const complete=()=>!!selectedLocation()&&Object.keys(CHOICES).every(field=>ExplorerModel.choice(field,current()[field]));
+function saveDraft(){
+  try{window.localStorage.setItem(STORAGE_KEY,JSON.stringify(draft));$('save-status').textContent='Your valid scenario and choices are saved in this browser.';}
+  catch{$('save-status').textContent='Browser saving is unavailable. Use Print / Save PDF to keep this scenario.';}
+}
+function loadDraft(){
+  try{
+    const raw=window.localStorage.getItem(STORAGE_KEY);
+    if(raw){draft=ExplorerModel.normalizeDraft(JSON.parse(raw));$('save-status').textContent='Your saved country and state scenarios are ready to review.';}
+  }catch{$('save-status').textContent='Starting fresh. Use Print / Save PDF to keep this scenario if browser saving is unavailable.';}
+}
+function buildInputs(){
+  $('ai-preset').innerHTML=Object.entries(ExplorerModel.demandPresets).map(([id,preset])=>`<option value="${id}">${escapeHTML(preset.label)}</option>`).join('')+'<option value="custom">Custom AI mix</option>';
+  $('energy-preset').innerHTML=Object.entries(ExplorerModel.energyPresets).map(([id,preset])=>`<option value="${id}">${escapeHTML(preset.label)}</option>`).join('')+'<option value="custom">Custom energy mix</option>';
+  $('ai-inputs').innerHTML=ReadinessModel.LEVELS.map(level=>`<tr><th scope="row">${level.label}<small>${level.power}</small></th><td><label class="sr-only" for="count-${level.id}">Number of ${level.label.toLowerCase()} AI demand units</label><input type="number" id="count-${level.id}" data-numeric="ai" min="0" max="1000" step="1" inputmode="numeric"></td><td><label class="sr-only" for="mw-${level.id}">MW per ${level.label.toLowerCase()} AI demand unit</label><input type="number" id="mw-${level.id}" data-numeric="ai" min="0.01" max="1000000" step="0.01" inputmode="decimal"></td></tr>`).join('');
+  $('energy-inputs').innerHTML=COURSE_DATA.technologies.map((tech,index)=>`<div class="energy-unit"><label for="energy-${index}">${escapeHTML(tech.name)}<small id="energy-help-${index}">${escapeHTML(tech.size)} / unit · ${tech.minYears}–${tech.maxYears} years</small></label><input type="number" id="energy-${index}" data-numeric="energy" min="0" max="9999" step="1" inputmode="numeric" aria-describedby="energy-help-${index}"></div>`).join('');
+  for(const [field,group] of Object.entries(CHOICES))$(field+'-options').innerHTML=group.options.map(option=>`<label class="choice-card" id="card-${field}-${option.id}" for="${field}-${option.id}"><input type="radio" id="${field}-${option.id}" name="${field}" value="${option.id}" data-field="${field}"><span><strong>${escapeHTML(option.label)}</strong><small>${escapeHTML(option.hint)}</small></span></label>`).join('');
+}
+function syncSettingContext(){
+  const context=setting();
+  $('scope').value=draft.scope;
+  $('location-label').textContent=context.label;
+  $('location').innerHTML=`<option value="">${context.placeholder}</option>`+context.locations.map(location=>`<option value="${escapeHTML(location)}">${escapeHTML(location)}</option>`).join('');
+  $('location').value=selectedLocation();
+  $('context-location').textContent=selectedLocation()||'my assigned '+context.noun;
+  $('factor-heading').textContent='Use the '+context.noun+' decision factors';
+  $('factor-list').innerHTML=context.factors.map(name=>`<li>${escapeHTML(name)}</li>`).join('');
+  $('stakeholder-list').innerHTML=context.stakeholders.map(role=>`<li>${escapeHTML(role.name)}</li>`).join('');
+  ['context-roadmap-link','context-stakeholder-link','context-risk-link'].forEach((id,index)=>{
+    const link=context.links[index];$(id).setAttribute('href',link.url);
+    $(id).innerHTML=escapeHTML(link.label)+' <span class="sr-only">(new tab)</span>';
+  });
+  $('course-links').innerHTML=courseLinks().map(link=>`<li><a href="${escapeHTML(link.url)}" target="_blank" rel="noopener noreferrer">${escapeHTML(link.label)} <span class="sr-only">(new tab)</span></a></li>`).join('');
+}
+function syncChoices(){
+  for(const [field,group] of Object.entries(CHOICES))for(const option of group.options){
+    const checked=current()[field]===option.id;
+    $(field+'-'+option.id).checked=checked;
+    $('card-'+field+'-'+option.id).classList.toggle('selected',checked);
+  }
+}
+function markErrors(errors){
+  pendingErrors=errors;
+  for(const element of document.querySelectorAll('[data-numeric]')){
+    const error=errors.find(item=>item.id===element.id);
+    element.setAttribute('aria-invalid',error?'true':'false');
+    const original=element.id.startsWith('energy-')?'energy-help-'+element.id.slice(7):'';
+    const described=[original,error?'error-'+element.id:''].filter(Boolean).join(' ');
+    if(described)element.setAttribute('aria-describedby',described);else element.removeAttribute('aria-describedby');
+  }
+  $('input-errors').hidden=errors.length===0;
+  $('input-errors').innerHTML=errors.length?'<strong>Results use your last valid inputs.</strong> Correct the following to update and save the scenario:<ul>'+errors.map(error=>`<li id="error-${error.id}">${escapeHTML(error.message)}</li>`).join('')+'</ul>':'';
+}
+function syncInputs(){
+  const plan=current();
+  syncSettingContext();
+  $('ai-preset').value=plan.aiPreset;
+  $('energy-preset').value=plan.energyPreset;
+  for(const level of ReadinessModel.LEVELS){$('count-'+level.id).value=plan.ai[level.id].count;$('mw-'+level.id).value=plan.ai[level.id].mw;}
+  plan.quantities.forEach((quantity,index)=>{$('energy-'+index).value=quantity;});
+  $('include-conditional').checked=plan.includeConditional;
+  $('note').value=plan.note;
+  markErrors([]);syncChoices();renderResults();renderSummary();
+}
+function readNumericInputs(){
+  const candidate=Object.fromEntries(ReadinessModel.LEVELS.map(level=>[level.id,{count:$('count-'+level.id).value,mw:$('mw-'+level.id).value}]));
+  const checked=ReadinessModel.validateFacilities(candidate);
+  const errors=checked.errors.map(error=>({...error,message:error.message.replace('facilities','AI demand units')}));
+  const quantities=COURSE_DATA.technologies.map((tech,index)=>{
+    const text=$('energy-'+index).value;
+    const value=text.trim()===''?NaN:Number(text);
+    if(!ExplorerModel.validQuantity(value))errors.push({id:'energy-'+index,message:tech.name+': enter a whole number of units from 0 to 9,999.'});
+    return value;
+  });
+  markErrors(errors);
+  if(errors.length){renderResults();renderSummary();return false;}
+  const plan=current();
+  plan.ai=checked.facilities;plan.quantities=quantities;
+  plan.aiPreset=Object.keys(ExplorerModel.demandPresets).find(id=>JSON.stringify(ExplorerModel.demandFor(id))===JSON.stringify(plan.ai))??'custom';
+  plan.energyPreset=Object.keys(ExplorerModel.energyPresets).find(id=>JSON.stringify(ExplorerModel.energyFor(id))===JSON.stringify(quantities))??'custom';
+  $('ai-preset').value=plan.aiPreset;$('energy-preset').value=plan.energyPreset;
+  renderResults();renderSummary();saveDraft();return true;
+}
+function aiMixText(result){return result.demand.rows.filter(row=>row.count>0).map(row=>n(row.count)+' '+row.level.label.toLowerCase()+' × '+n(row.mw)+' MW').join(' + ')||'No AI demand selected';}
+function energyMixText(result){return result.selected.map(row=>n(row.quantity)+' × '+row.tech.name).join('; ')||'No energy units selected';}
+function timingLabel(row){return row.timing==='window'?'Within the 1–4-year comparison':row.timing==='conditional'?'Earliest timing only; range extends beyond 2030':'Beyond the four-year window';}
+function countingLabel(row){return row.tech.kind==='storage'?'Storage only; not added':row.tech.kind==='hybrid'?'Unsplit hybrid; not added':row.included?(row.timing==='conditional'?'Included by your earliest-timing assumption':'Included in nameplate comparison'):'Not included in 2030 comparison';}
+function calculationHTML(result){
+  const plan=current();
+  const outside=result.demand.rows.filter(row=>row.count>0&&row.outsideReference);
+  const demandMath=result.demand.rows.map(row=>n(row.count)+' × '+n(row.mw)).join(' + ')+' = '+n(result.demand.totalMW)+' MW';
+  const details=result.selected.length?`<div class="table-scroll" role="region" aria-label="Selected technology calculation details" tabindex="0"><table class="calculation-table"><caption>Selected units × course ranges. Dollar amounts are whole-mix investment, not annual electricity costs.</caption><thead><tr><th scope="col">Technology / count</th><th scope="col">Capacity range</th><th scope="col">Investment range</th><th scope="col">Course timing / treatment</th></tr></thead><tbody>${result.selected.map(row=>`<tr><th scope="row">${escapeHTML(row.tech.name)}<small>${n(row.quantity)} unit${row.quantity===1?'':'s'}</small></th><td>${range(row.minimum,row.maximum,row.tech.size.includes('+'))} MW<small>${escapeHTML(row.tech.kind==='hybrid'?'Generation / storage not split':row.tech.kind==='storage'?'Storage power rating':'Generation nameplate')}</small></td><td>${money(row.minimumCost)}–${money(row.maximumCost)}</td><td>${row.tech.minYears}–${row.tech.maxYears} years<small>${timingLabel(row)}</small><span class="timing-badge${row.timing==='conditional'?' conditional':''}">${countingLabel(row)}</span></td></tr>`).join('')}</tbody></table></div>`:'<p>No energy technology units selected. This does not mean there is no existing electricity supply in the selected setting.</p>';
+  return `<h3>AI demand</h3><p class="formula">${demandMath}</p>${outside.length?'<p><strong>Custom values outside the course category:</strong> '+outside.map(row=>escapeHTML(row.level.label)+' at '+n(row.mw)+' MW/unit (course '+row.level.power+')').join('; ')+'. They change power demand only.</p>':''}<p>These are sizing units across your assigned setting. The ${result.demand.years?result.demand.years.join('–')+'-year':'unselected'} course AI readiness horizon ${result.demand.years?'spans the selected levels and is not shortened by the energy comparison.':'is not calculated without an AI selection.'}</p><h3>A four-year comparison, not a delivery forecast</h3><p>The scenario runs from January 2027 to December 31, 2030. By default, generation is counted only when its full course timing range is within four years. ${plan.includeConditional?'You have also included options whose earliest timing fits, even though their range extends beyond the window.':'Options whose earliest timing fits but whose range extends beyond the window are excluded.'} Longer-range options remain outside this comparison. The hypothetical SMR milestone does not change its 4–7-year range.</p>${details}<p><strong>All selected generation:</strong> ${mwRange(result.totals.generation)}. <strong>Counted in the 2030 comparison:</strong> ${mwRange(result.windowGeneration)}.</p><p><strong>Standalone storage:</strong> ${mwRange(result.totals.storage)}. <strong>Unsplit Solar + Storage:</strong> ${mwRange(result.totals.hybrid)}. Neither is added to generation. Storage MW alone does not give storage duration or stored energy.</p><h3>Nameplate gap</h3><p class="formula">Lower gap = max(0, ${n(result.demand.totalMW)} − ${n(result.windowGeneration.maximum)}) = ${n(result.gap.minimum)} MW<br>Upper gap = max(0, ${n(result.demand.totalMW)} − ${n(result.windowGeneration.minimum)}) = ${n(result.gap.maximum)} MW</p><p>This compares the selected AI demand with the selected generation ranges. It excludes existing electricity supply in the selected setting and existing demand. Rated capacity is not dependable output or a supply-demand balance for the selected setting.</p><h3>Illustrative energy investment</h3><p class="formula">Sum of (units × lower investment) to sum of (units × upper investment) = ${costRange(result)}</p><p>This adds the course ranges for all selected energy units, including storage, hybrids, and options outside 2030. It assumes independent, additive units for comparison; it does not establish linear scaling as a fact or account for shared costs or economies of scale. AI investment is not added, to avoid an unsupported combined total. No annual operating cost, return, or payback is calculated.</p>`;
+}
+function renderResults(){
+  const result=ExplorerModel.calculate(current());
+  $('ai-mix').textContent=aiMixText(result);
+  $('energy-mix').textContent=energyMixText(result);
+  $('demand-result').textContent=n(result.demand.totalMW)+' MW';
+  $('gap-result').textContent=mwRange(result.gap);
+  $('cost-result').textContent=costRange(result);
+  $('result-status').textContent=(pendingErrors.length?'Last valid inputs shown. ':'')+(selectedLocation()?setting().label+': '+selectedLocation()+' · ':'Choose your assigned '+setting().noun+' to label this scenario · ')+(current().includeConditional?'Earliest-timing options included.':'Full course timing range must fit four years.');
+  $('calculation-content').innerHTML=calculationHTML(result);
+  $('energy-reference').innerHTML=`<strong>Unit conversion only:</strong> ${n(result.demand.totalMW)} MW × 8,760 hours (365 × 24) = ${n(result.fullLoadReferenceMWh)} MWh for a reference year at full load. This is not a forecast of annual use; no utilization assumption has been supplied.`;
+}
+function renderSummary(){
+  const plan=current(),result=ExplorerModel.calculate(plan);
+  const selected=Object.entries(CHOICES).filter(([field])=>ExplorerModel.choice(field,plan[field]));
+  $('recommendation-status').textContent=complete()?'Your advice is ready to review against the scenario and conditions in your assigned setting.':selected.length?'Your advice is taking shape. Consider the choices still open.':'Make the choices above to shape your recommendation.';
+  $('recommendation-summary').innerHTML=`<p class="recommendation-location"><strong>${setting().label}:</strong> ${escapeHTML(selectedLocation()||'Not selected')}</p><p class="scenario-line">${n(result.demand.totalMW)} MW AI demand · ${mwRange(result.gap)} nameplate gap · ${costRange(result)} illustrative energy investment${pendingErrors.length?' · last valid inputs':''}</p>`+(selected.length?selected.map(([field,group])=>`<p><strong>${group.heading}:</strong> ${escapeHTML(ExplorerModel.choice(field,plan[field]).advice)}</p>`).join(''):'<p class="unanswered">Choose the response that fits the evidence and conditions you have considered.</p>');
+}
+function createPrintReport(){
+  const plan=current(),result=ExplorerModel.calculate(plan);
+  let html=`<header class="print-heading"><p class="print-kicker">AI READINESS / STUDENT EXPLORER / COURSE SIMULATION</p><h1>The 2030 Acceleration Challenge</h1><p>${setting().label}: ${escapeHTML(selectedLocation()||'Not selected')}</p><p>Simulation: January 2027 · Leadership target: December 31, 2030</p></header><p class="print-status${complete()?'':' draft'}">${complete()?'Recommendation for review':'Draft recommendation — location or advice choices remain open.'}</p>`;
+  if(pendingErrors.length)html+='<p class="print-small"><strong>Last valid scenario printed:</strong> unfinished or invalid edits were not used or saved. '+pendingErrors.map(error=>escapeHTML(error.message)).join(' ')+'</p>';
+  html+=`<table class="print-metrics"><caption>Course scenario results</caption><thead><tr><th scope="col">Measure</th><th scope="col">Result / scope</th></tr></thead><tbody><tr><th scope="row">AI power needed</th><td>${n(result.demand.totalMW)} MW</td></tr><tr><th scope="row">Nameplate gap</th><td>${mwRange(result.gap)} · selected generation in the four-year comparison</td></tr><tr><th scope="row">Energy investment</th><td>${costRange(result)} · whole selected energy mix, including later options; not annual cost</td></tr></tbody></table>`;
+  html+='<section class="print-section"><h2>AI demand inputs</h2><table><thead><tr><th scope="col">Course category</th><th scope="col">Count × MW per unit</th><th scope="col">Power demand</th></tr></thead><tbody>'+result.demand.rows.map(row=>`<tr><th scope="row">${row.level.label} (${row.level.power})</th><td>${n(row.count)} × ${n(row.mw)}${row.count>0&&row.outsideReference?' · custom MW outside course range':''}</td><td>${n(row.totalMW)} MW</td></tr>`).join('')+'</tbody></table>'+(result.demand.years?`<p class="print-small">Course AI readiness horizon span: ${result.demand.years.join('–')} years. This is not a combined construction schedule and has not been shortened to 2030.</p>`:'')+'</section>';
+  html+='<section class="print-section"><h2>Selected energy mix</h2>'+(result.selected.length?'<table class="print-portfolio"><thead><tr><th scope="col">Technology × count</th><th scope="col">Capacity / investment</th><th scope="col">Course years / comparison treatment</th></tr></thead><tbody>'+result.selected.map(row=>`<tr><th scope="row">${escapeHTML(row.tech.name)} × ${n(row.quantity)}</th><td>${range(row.minimum,row.maximum,row.tech.size.includes('+'))} MW<br>${money(row.minimumCost)}–${money(row.maximumCost)}</td><td>${row.tech.minYears}–${row.tech.maxYears} years<br>${countingLabel(row)}</td></tr>`).join('')+'</tbody></table>':'<p>No energy units selected. Existing electricity supply in the selected setting is not represented.</p>')+'</section>';
+  html+=`<section class="print-section"><h2>Calculation assumptions</h2><p>AI MW = sum(count × MW/unit). Counted generation: ${mwRange(result.windowGeneration)}. Nameplate gap = max(0, AI MW − counted generation), using the upper capacity endpoint for the lower gap and the lower endpoint for the upper gap.</p><p>Timing comparison: four years, January 2027–December 2030, with the full window assumed available. ${plan.includeConditional?'Earliest-timing options are included even where their range extends beyond the window.':'Only generation whose entire course timing range fits four years is counted.'} SMR timing remains 4–7 years despite the hypothetical milestone.</p><p>All selected generation: ${mwRange(result.totals.generation)}. Standalone storage: ${mwRange(result.totals.storage)}. Unsplit Solar + Storage: ${mwRange(result.totals.hybrid)}. Storage and unsplit hybrid MW are not added to generation.</p><p>Energy investment = sum of each count × its course investment endpoints, including later options. Independent, additive units are an illustration, not a factual scaling relationship; shared costs and economies of scale are unspecified. AI investment is not added.</p><p>A zero nameplate gap does not establish dependable supply, available grid capacity, or overall readiness. Setting and location selection supply context, not local statistics. The same course ranges apply to every location.</p><p>Annual use, annual generation, electricity share for the selected location, annual electricity cost, dependable supply gap, emissions, and water totals: not provided by the course apps. Full-load unit conversion only: ${n(result.demand.totalMW)} MW × 8,760 h = ${n(result.fullLoadReferenceMWh)} MWh/reference year; this is not annual-use forecasting.</p></section>`;
+  for(const [field,group] of Object.entries(CHOICES))html+=`<section class="print-choice"><h2>${group.heading}</h2><p>${escapeHTML(ExplorerModel.choice(field,plan[field])?.advice??'Not selected')}</p></section>`;
+  if(plan.note.trim())html+=`<section class="print-note"><h2>Evidence, tradeoff, or condition</h2><p>${escapeHTML(plan.note.trim())}</p></section>`;
+  html+='<section class="print-section"><h2>Course sources</h2><p class="print-small">AI readiness course calculator model (power categories and horizons); technology energy calculator (capacity, investment, and timing); '+setting().noun+' roadmap and stakeholder map (decision lenses); student acceleration challenge (story and target). No outside dataset is used.</p><ul>'+courseLinks().map(link=>`<li><a href="${escapeHTML(link.url)}">${escapeHTML(link.label)}</a></li>`).join('')+'</ul></section><p class="print-footnote">The 2027 SMR milestone is hypothetical. This is a course comparison and a learner’s recommendation, not a location-specific forecast. Only the current setting and location are printed.</p>';
+  return html;
+}
+loadDraft();buildInputs();syncInputs();
+document.addEventListener('input',event=>{if(event.target.dataset?.numeric)readNumericInputs();});
+document.addEventListener('change',event=>{
+  const element=event.target;
+  if(element.id==='scope'||element.id==='location'){
+    const unfinished=pendingErrors.length>0;
+    const changed=element.id==='scope'?ExplorerModel.changeScope(draft,element.value):ExplorerModel.changeLocation(draft,element.value);
+    if(!changed)return;
+    syncInputs();saveDraft();
+    $('activity-status').textContent=(unfinished?'Unfinished numeric edits were not saved. ':'')+'Assigned '+setting().noun+' scenario shown. Country and state scenarios are saved separately. A new location keeps the inputs from its current setting and starts with blank advice.';
+    return;
+  }
+  if(element.id==='ai-preset'||element.id==='energy-preset'){
+    const ai=element.id==='ai-preset',presets=ai?ExplorerModel.demandPresets:ExplorerModel.energyPresets;
+    if(element.value==='custom'){$(ai?'count-low':'energy-0').focus();return;}
+    if(!Object.hasOwn(presets,element.value))return;
+    if(ai){current().aiPreset=element.value;current().ai=ExplorerModel.demandFor(element.value);}
+    else{current().energyPreset=element.value;current().quantities=ExplorerModel.energyFor(element.value);}
+    syncInputs();saveDraft();return;
+  }
+  if(element.id==='include-conditional'){current().includeConditional=element.checked;renderResults();renderSummary();saveDraft();return;}
+  const field=element.dataset?.field;
+  if(field&&ExplorerModel.choice(field,element.value)){current()[field]=element.value;syncChoices();renderSummary();saveDraft();}
+});
+$('note').addEventListener('input',event=>{current().note=event.target.value.slice(0,1200);saveDraft();});
+$('challenge-form').addEventListener('submit',event=>event.preventDefault());
+$('print-button').addEventListener('click',()=>{
+  $('print-report').innerHTML=createPrintReport();
+  try{window.print();}catch{$('activity-status').textContent='Printing could not open here. Open this file in a browser and choose Print / Save PDF.';}
+});
+window.addEventListener('beforeprint',()=>{$('print-report').innerHTML=createPrintReport();});
+$('reset-button').addEventListener('click',()=>{$('reset-dialog').showModal();$('cancel-reset').focus();});
+$('cancel-reset').addEventListener('click',()=>{$('reset-dialog').close();$('reset-button').focus();});
+$('confirm-reset').addEventListener('click',()=>{
+  draft.cases[draft.scope][selectedLocation()]=ExplorerModel.createCase();syncInputs();saveDraft();$('print-report').replaceChildren();
+  $('reset-dialog').close();$('reset-button').focus();$('activity-status').textContent='Scenario and advice reset for the selected location. Other country and state scenarios are unchanged.';
+});
+</script>
+</body>
+</html>
