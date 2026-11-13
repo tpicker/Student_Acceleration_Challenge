@@ -154,6 +154,7 @@
 .comparison-note{font-size:.79rem;color:var(--muted);margin:18px 0 24px}.decision-intro{color:var(--muted);font-size:.9rem;margin-top:12px}
 #use-earlier{margin-top:16px}.condition-field{margin-top:20px}.copy-feedback{margin-top:22px;font-size:.88rem}.copy-feedback textarea{margin-top:10px}
 .input-errors{margin:0 0 20px}.copy-feedback p:empty{display:none}.empty-energy{font-size:.82rem;color:var(--muted);margin:13px 0}
+.copy-feedback #copy-status:not(:empty){margin-top:12px}
 @media(max-width:900px){.comparison-dashboard{grid-template-columns:1fr}.comparison-panel{padding:22px}.hero-actions{width:100%}}
 @media(max-width:620px){.setting-bar{grid-template-columns:1fr}.comparison-panel{padding:20px 16px}.counter-strip{gap:10px 14px;padding:16px}.technology-row{grid-template-columns:minmax(0,1fr) 72px}.remove-technology{grid-column:1/-1;justify-self:start}.comparison-panel .input-table{font-size:.8rem}.counter-strip strong{font-size:1.3rem}}
 @media print{.print-report .comparison-print{table-layout:auto;margin:8pt 0}.print-report .comparison-print th:first-child{width:50%}.print-report .print-small{font-size:8pt;margin:7pt 0}.print-report h2{margin-top:12pt}}
@@ -194,7 +195,7 @@
       </div>
       <p class="comparison-note">Course ranges are indicative. Investment totals add quantity × course cost ranges as an illustrative scenario; they do not establish linear scaling as fact. Schedule ranges assume overlapping work. Storage and combined solar/storage ratings are shown separately from generation.</p>
       <form id="challenge-form"><section class="decision-flow" aria-labelledby="decision-title"><p class="eyebrow">YOUR JUDGMENT</p><h2 id="decision-title">Make your recommendation</h2><p class="decision-intro">Use the timing limits and your comparison to decide what is credible for your assigned setting. Energy capacity alone does not shorten the course AI readiness timelines.</p><fieldset class="decision-group"><legend>How credible is the 2030 target?</legend><div class="choice-options" id="feasibility-options"></div></fieldset><div id="condition-field" class="condition-field" hidden><label class="field-label" for="condition">What key condition would need to be met?</label><input id="condition" maxlength="240" placeholder="One brief condition, if useful"></div></section></form>
-      <div class="copy-feedback"><p id="copy-status" role="status"></p><div id="copy-fallback" hidden><label class="field-label" for="copy-text">Summary of responses — manual copy</label><p class="field-help" id="copy-help">Press Ctrl+C or Command+C to copy the selected text, or use your device’s Copy command.</p><textarea id="copy-text" readonly rows="10" aria-describedby="copy-help"></textarea></div></div>
+      <div class="copy-feedback"><div class="hero-actions"><button type="button" id="copy-summary-bottom">Copy summary of responses</button></div><p id="copy-status" role="status"></p><div id="copy-fallback" hidden><label class="field-label" for="copy-text">Summary of responses — manual copy</label><p class="field-help" id="copy-help">Press Ctrl+C or Command+C to copy the selected text, or use your device’s Copy command.</p><textarea id="copy-text" readonly rows="10" aria-describedby="copy-help"></textarea></div></div>
     </main>
     <footer class="site-footer"><p>AI Energy Lab / Student challenge</p><p>Save a copy before leaving. Nothing is submitted automatically.</p></footer>
   </div>
@@ -522,7 +523,8 @@ $('use-earlier').addEventListener('click',()=>{
   const excluded=COURSE_DATA.technologies.filter((tech,i)=>plan.quantities[i]>0&&!eligible(tech));
   $('filter-status').textContent=(plan.revisedQuantities.some(q=>q>0)?'Earlier technologies that fit the full four-year window are shown on the right.':'No earlier energy technologies fit the full four-year window.')+(excluded.length?' Excluded: '+excluded.map(t=>t.name).join('; ')+'.':'');buildEnergy('revised');renderResults();save();
 });
-$('copy-summary').addEventListener('click',copySummary);$('copy-text').addEventListener('click',event=>event.target.select());
+for(const id of ['copy-summary','copy-summary-bottom'])$(id).addEventListener('click',copySummary);
+$('copy-text').addEventListener('click',event=>event.target.select());
 $('print-button').addEventListener('click',()=>{$('print-report').innerHTML=printHTML();try{window.print();}catch{$('activity-status').textContent='Printing could not open here. Use your browser’s Print command.';}});
 window.addEventListener('beforeprint',()=>{$('print-report').innerHTML=printHTML();});
 $('challenge-form').addEventListener('submit',event=>event.preventDefault());
