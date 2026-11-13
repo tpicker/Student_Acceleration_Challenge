@@ -1,77 +1,72 @@
-STUDENT EXPLORER / THE 2030 ACCELERATION CHALLENGE
+THE 2030 ACCELERATION CHALLENGE — DOCUMENT REVISION
 
-PURPOSE
-This duplicates the approved global country explorer for students in the course
-and adds the U.S. state setting. The global country-only copy and the earlier
-simplified student challenge are unchanged. Nothing was published or edited in
-GitHub or ThingLink while preparing this package.
+UPLOAD
+Extract this ZIP and replace index.html in Student_Acceleration_Challenge with this index.html.
+Keep the existing repository name and Pages settings. No build step is needed.
+The app is self-contained; the other files are supporting notes and references.
+No live repository, published website, or ThingLink scenario was changed.
 
-STUDENT USE
-Select the assigned setting (Country or U.S. state), then the assigned location.
-Build on the earlier simulation activities to assess the 2030 acceleration target.
-The context accordion switches to the matching course decision factors and
-stakeholder roles. The course reference ranges are the same for every location;
-there are no added national or state electricity statistics or readiness scores.
+FACULTY CHANGES
+- Deleted the orientation, requested header sentence, and Leadership’s target label.
+- Added a prominent December 31, 2030 target near the header prompt.
+- Replaced the former summary sidebar, examples, customizer, conditional-timing
+  switch, calculation explainers, resource section, and multi-question advice
+  flow with an earlier-decisions / revised-2030 dashboard.
+- Kept both challenge story cards and the final target-credibility question.
+- Spelled out small modular reactor and removed the milestone accordion.
+- Added a compact MW comparison above the dashboard and retained Copy summary
+  of responses and Print / Save PDF with matching current-location results.
 
-Country: Algeria, Brazil, Costa Rica, France, Ireland, Japan, Jordan, Kenya,
-Mexico, Morocco, Oman, Pakistan, South Korea, Ukraine, Venezuela, Vietnam.
+EARLIER DECISIONS AND SAVING
+Enter the earlier AI counts/MW, energy choices/quantities, final schedule and
+final cost from saved course summaries. The final schedule/cost fields are
+learner-entered records and are kept separate from calculated course ranges.
+Other course apps do not transfer their entries automatically. A saved scenario
+from the previous version of this same Acceleration app can be restored as the
+left-side starting point when its browser storage is accessible. Confirm it.
+The previous storage key is read but never overwritten. Revised comparisons use
+a separate version-2 key. Each location, and both settings in the Student app,
+keeps independent entries. A new location starts blank, with no example loaded.
+Storage can be blocked in an embed or private browser; saving failures are shown.
+Copy or print before leaving. No responses are sent automatically.
 
-U.S. state: Colorado, Connecticut, Maryland, New York, South Dakota, Texas,
-West Virginia. Both lists are alphabetical and retained from the course apps.
+2030 TIMING RULE
+The simulation starts in January 2027 and allows four years to December 31, 2030.
+Only energy technologies with maxYears <= 4 appear in the revised selector.
+The full course range must fit; there is no earliest-timing override. Existing
+technology ranges are unchanged, including small modular reactor at 4–7 years.
+The fictional 2027 design-certification milestone does not shorten that range.
+All supplied AI course horizons exceed four years: Low 5–10, Medium 10–15,
+High 15–20 years. Consequently no new AI level is offered on the revised side.
+The app explicitly explains this result, rather than reporting a smaller MW
+choice as new AI readiness deliverable by 2030. Counts alone cannot establish
+readiness. The user still makes the final target-credibility judgment.
 
-APPROVED EXPERIENCE RETAINED
-- The same navy/white colors, type, controls, responsive layout, and source values.
-- A separate, initially closed "See examples" accordion; examples fill the
-  always-visible customizer for students to adjust counts and MW.
-- Mixed AI demand units and multiple units of all 13 energy technology types.
-- A live "Scenario at a glance" sidebar at widths of 1,100 pixels and above.
-  It follows scrolling alongside inputs and advice. On narrower screens it
-  appears above the customizer; a short desktop window can scroll the sidebar.
-- The same four-year comparison, generation/storage/hybrid separation, indicative
-  investment ranges, calculation details, SMR story, and three advice choices.
-- Optional note and Print / Save PDF for the current location, even as a draft.
+CALCULATION SCOPE
+AI MW = sum(count × MW each). Generation, standalone storage, and the unsplit
+solar/storage category remain separate. The power strip compares earlier AI
+demand with generation selected for 2030; it is not a dependable supply balance.
+Energy investment adds quantity × lower/upper course cost endpoints as an
+indicative scenario, not a factual linear scaling claim. The energy schedule
+uses the longest selected lower and upper bounds, assuming overlapping work.
+No outside data, annual electricity cost, or combined AI/energy cost was added.
+Invalid numeric edits are excluded; copies and print identify last valid inputs.
 
-SAVING
-This copy uses its own browser-storage key: ai-readiness-student-explorer-v1.
-It does not import or alter drafts from the global app or the earlier student app.
-Country and state retain their own selected location, inputs, and advice.
-Returning to a location restores its case. Selecting a new location within a
-setting carries over that setting's current quantitative inputs with blank advice.
-Reset affects only the location currently shown. It preserves the selected setting,
-location, and all other cases. Nothing is submitted automatically.
-Invalid numeric edits remain visible, but results and saving use the last valid
-scenario. Printing labels this explicitly. Selecting a preset or switching
-setting/location clears unfinished numeric edits. Browser storage may be blocked
-or unavailable for local files; the app can still be used and printed.
-
-MANUAL UPLOAD
-Open index.html in a browser to review it. It is a complete, editable, self-contained
-app: no external libraries, build step, API, or supporting data fetch is needed.
-The JSON source snapshot and text notes are included for review, not runtime use.
-
-For a separate GitHub Pages site, upload index.html to the root of a new repository,
-for example Acceleration_Challenge_Student_Explorer. Include the other files if
-desired. Keep or configure the usual Pages publishing branch and root folder.
-Use the actual published URL GitHub supplies. Do not replace the global version.
-Alternatively, upload this index.html in a new student/ folder under an existing
-Pages site and link directly to that folder. Keep the other index.html files.
-
-THINGLINK BRANCHES
-Use two destinations after manual upload:
-- Global users: the existing country-only Acceleration_Challenge_Country_Explorer.
-- Course students: this country-and-state Acceleration_Challenge_Student_Explorer.
-Inside the student app, students choose the setting and location assigned in the
-simulation. They can explore either setting; the app does not require both.
-This package does not configure, submit to, or change the ThingLink scenario.
+SOURCE
+Read-only snapshot of tpicker/Student_Acceleration_Challenge/index.html.
+Git blob SHA: 97e98e8df9b5c8504722e41afdcb6e3bed2c4f43
+SHA-256 of frozen source: f8c53974e4f2fd337353c0647c6b2f7b4368997ebc10360e279e9c98f79742c2
+The published app’s course values and original stylesheet blocks are preserved.
+Layout changes follow the faculty document; no new palette was introduced.
 
 FILES
-index.html                  Complete editable app and upload file.
-.nojekyll                   Optional static-hosting marker.
-course-reference-data.json  Reference inputs and local source hashes.
-COURSE-SOURCE-NOTES.txt     Course-only provenance and calculation assumptions.
-README.txt                  These upload, use, and branching instructions.
+index.html                Self-contained, editable app for manual upload.
+.nojekyll                 Optional static-hosting marker.
+course-reference-data.json Course input snapshot used by this revision.
+README.txt                Instructions, limits, and source provenance.
 
-REVIEW
-16 automated checks passed for calculation preservation, switching, local saving,
-reset, print content, source scope, and preserved files. Browser layout and PDF appearance could not be
-visually checked in this environment; review your browser's print preview.
+VERIFICATION
+Automated checks cover the timing filter, AI horizon limit, MW/cost/schedule
+math, copy and manual fallback, print data, saved-work restoration, invalid edits,
+reset, accessible labels, and separation by location. Browser layout and PDF
+appearance were not visually inspected in this environment.
