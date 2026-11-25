@@ -159,14 +159,36 @@
 @media(max-width:620px){.setting-bar{grid-template-columns:1fr}.comparison-panel{padding:20px 16px}.counter-strip{gap:10px 14px;padding:16px}.technology-row{grid-template-columns:minmax(0,1fr) 72px}.remove-technology{grid-column:1/-1;justify-self:start}.comparison-panel .input-table{font-size:.8rem}.counter-strip strong{font-size:1.3rem}}
 @media print{.print-report .comparison-print{table-layout:auto;margin:8pt 0}.print-report .comparison-print th:first-child{width:50%}.print-report .print-small{font-size:8pt;margin:7pt 0}.print-report h2{margin-top:12pt}}
 </style>
+<style id="faculty-revision-7">/* Faculty revision: use the established colors and controls. */
+.mw-comparison{margin-top:26px}
+.mw-comparison .field-label{font-size:1rem;line-height:1.45}
+.mw-total-input{font-size:clamp(1.15rem,2.5vw,1.6rem);font-weight:700;min-height:52px;color:var(--navy)}
+.mw-comparison .mw-basis{font-size:.84rem;line-height:1.5;color:var(--muted)}
+.mw-comparison button{justify-self:start;font-size:.84rem;padding:8px 10px}
+.additional-values{margin-top:22px}
+.additional-values>summary{font-size:1.04rem;font-weight:700;color:var(--navy);cursor:pointer}
+.custom-technology-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px;margin-top:18px}
+.custom-fields{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.custom-fields .field-label{font-size:.85rem;line-height:1.4}
+.custom-technology h3{margin:0 0 10px;font-size:1.04rem}
+.custom-technology .field-help{font-size:.84rem}
+#use-earlier-ai{margin-top:14px}
+#migration-note{font-size:.85rem;line-height:1.5;color:var(--muted)}
+.comparison-totals p{overflow-wrap:anywhere}
+@media(max-width:620px){
+ .mw-comparison{grid-template-columns:1fr;gap:20px}
+ .mw-comparison .counter-arrow{display:none}
+ .custom-technology-grid,.custom-fields{grid-template-columns:1fr}
+}
+@media print{.print-response{font-size:9pt;line-height:1.4}.print-response p{margin:4pt 0;overflow-wrap:anywhere}}
+</style>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to comparison</a>
 <div class="screen-only">
-  <header class="topbar"><span class="brand">AI ENERGY LAB / AI READINESS</span><span class="topbar-context">Student challenge · Course simulation</span></header>
   <div class="container">
     <section class="hero" aria-labelledby="app-title">
-      <div><p class="eyebrow">THE BRIEF HAS CHANGED</p><h1 id="app-title">The 2030 Acceleration Challenge</h1><p class="target-date">The new target is December 31, 2030</p><p class="intro">How much AI readiness could your assigned country or U.S. state support—and how quickly?</p><p class="window-note">Imagine it is January 2027. Work backward from the four-year deadline to identify which AI levels and energy options fit the course timelines, if any.</p></div>
+      <div><p class="eyebrow">THE BRIEF HAS CHANGED</p><h1 id="app-title">The 2030 Acceleration Challenge</h1><p class="target-date">The new target is December 31, 2030</p><p class="intro">How much AI readiness can you support—and how quickly?</p><p class="window-note">Imagine it is January 2027. Compare your earlier choices with the four-year target.</p></div>
       <div class="hero-actions"><button type="button" id="copy-summary">Copy summary of responses</button><button type="button" id="print-button" class="primary">Print / Save PDF</button><button type="button" id="reset-button">Reset this comparison</button></div>
     </section>
     <main id="main">
@@ -176,28 +198,28 @@
           <section class="story-card" aria-labelledby="new-brief-title"><p class="eyebrow">THE BRIEF HAS CHANGED</p><h2 id="new-brief-title">Can readiness move faster?</h2><p>New leadership wants your recommended level of AI readiness supported by the end of 2030. Consider the energy, water, infrastructure, workforce, and public support needed to make that credible.</p><p>You can keep your direction, adjust the scale or pace, revisit the energy mix, or combine changes. Use your scenario and the tools for your assigned setting to decide.</p><p class="story-emphasis">Your role is to recommend a credible path for AI readiness in your assigned setting. Your evidence may show that the target needs more time.</p></section>
           <section class="story-card" aria-labelledby="energy-update-title"><p class="eyebrow">A NEW OPTION ENTERS THE DISCUSSION</p><h2 id="energy-update-title">Would a small modular reactor change your advice?</h2><p><strong>For this simulation:</strong> in 2027, a selected small modular reactor (SMR) design completes demonstration testing and receives U.S. Nuclear Regulatory Commission design certification.</p><p>A small modular reactor is a nuclear energy option. Consider whether this hypothetical milestone helps with the 2030 target, belongs in a later recommendation, or does not fit your energy mix.</p></section>
         </div>
-      <section class="counter-strip" aria-label="Power comparison" aria-live="polite" aria-atomic="true"><p><span>Earlier AI demand</span><strong id="prior-counter">—</strong></p><span class="counter-arrow" aria-hidden="true">→</span><p><span>Generation selected for 2030</span><strong id="revised-counter">—</strong></p><small>MW is a power rating. This comparison does not establish dependable electricity or AI readiness.</small></section>
-      <p class="dashboard-intro">Enter your earlier decisions on the left using your saved summaries, then change the energy mix on the right. Entries from the other course apps do not transfer automatically. Keep a copy of this comparison for your final recommendation.</p>
       <p id="input-errors" class="input-errors" role="status" hidden></p>
       <div class="comparison-dashboard">
         <section class="explorer-panel comparison-panel" aria-labelledby="prior-title"><p class="eyebrow">YOUR EARLIER DECISIONS</p><h2 id="prior-title">Record your starting point</h2>
-          <h3>AI readiness mix</h3><div class="table-scroll" role="region" aria-label="Earlier AI levels" tabindex="0"><table class="input-table"><caption>Counts across your assigned setting × MW per demand unit</caption><thead><tr><th scope="col">AI level</th><th scope="col">Count</th><th scope="col">MW each</th></tr></thead><tbody id="prior-ai"></tbody></table></div>
+          <h3>AI Readiness Combination of Levels</h3><div class="table-scroll" role="region" aria-label="Earlier AI levels" tabindex="0"><table class="input-table"><caption>Count of each AI level × MW each</caption><thead><tr><th scope="col">AI level</th><th scope="col">Count</th><th scope="col">MW each</th></tr></thead><tbody id="prior-ai"></tbody></table></div>
           <h3>Earlier energy technologies</h3><label class="field-label" for="prior-picker">Add a technology from your earlier selection</label><select id="prior-picker" data-picker="prior"></select><div id="prior-energy" class="technology-rows"></div>
-          <div class="recorded-fields"><div><label class="field-label" for="prior-schedule">Your earlier final schedule</label><input id="prior-schedule" maxlength="120" placeholder="e.g. 5–10 years or a completion date"></div><div><label class="field-label" for="prior-cost">Your earlier final cost estimate</label><input id="prior-cost" maxlength="120" placeholder="e.g. $1B–$2B; identify what it includes"></div></div>
           <div class="comparison-totals" id="prior-totals"></div>
         </section>
         <section class="explorer-panel comparison-panel" aria-labelledby="revised-title"><p class="eyebrow">WORK BACKWARD FROM 2030</p><h2 id="revised-title">Revise for the new target</h2>
-          <h3>AI levels that fit the deadline</h3><div class="timing-limit" id="ai-timing"></div><div id="revised-ai"></div>
-          <h3>Energy options within four years</h3><p class="field-help">Only options whose entire course schedule fits January 2027–December 2030 are available here.</p><label class="field-label" for="revised-picker">Add an eligible technology</label><select id="revised-picker" data-picker="revised"></select><div id="revised-energy" class="technology-rows"></div>
+          <h3>AI Readiness Combination of Levels</h3><div class="table-scroll" role="region" aria-label="Revised AI levels" tabindex="0"><table class="input-table"><caption>Revised counts × MW each</caption><thead><tr><th scope="col">AI level</th><th scope="col">Count</th><th scope="col">MW each</th></tr></thead><tbody id="revised-ai"></tbody></table></div><button type="button" id="use-earlier-ai">Use earlier AI combination</button><p class="field-help" id="ai-timing"></p>
+          <h3>Energy options within four years</h3><p class="field-help">Known options outside the four-year window are marked. Enter a schedule for Tidal Basin or Oil/Petroleum to check its timing.</p><label class="field-label" for="revised-picker">Add a technology for the 2030 comparison</label><select id="revised-picker" data-picker="revised"></select><div id="revised-energy" class="technology-rows"></div>
           <button type="button" id="use-earlier">Use earlier technologies that fit</button><p id="filter-status" class="field-help" role="status"></p>
-          <div class="comparison-totals" id="revised-totals"></div><p id="excluded-timing" class="field-help"></p>
+          <div class="comparison-totals" id="revised-totals"></div><p id="energy-timing" class="field-help"></p>
         </section>
       </div>
-      <p class="comparison-note">Course ranges are indicative. Investment totals add quantity × course cost ranges as an illustrative scenario; they do not establish linear scaling as fact. Schedule ranges assume overlapping work. Storage and combined solar/storage ratings are shown separately from generation.</p>
+      <p id="migration-note" hidden>An older combined Solar + Storage entry was removed. Add Solar and Battery Storage separately if needed.</p>
+      <details class="explorer-panel additional-values" id="custom-values"><summary>Tidal Basin and Oil/Petroleum assessment values</summary><p class="field-help">Enter per-unit estimates from your technology assessment. Costs are in million USD. These are your assessment values; the original course table did not provide presets.</p><div class="custom-technology-grid"><section class="custom-technology"><h3>Tidal Basin</h3><div class="custom-fields"><div><label class="field-label" for="custom-tidal-mw">MW per unit<span class="sr-only"> for Tidal Basin</span></label><input id="custom-tidal-mw" type="number" min="0.01" max="1000000000" step="any" inputmode="decimal" data-number="custom" data-tech="tidal" data-key="mw" placeholder="Not entered"></div><div><label class="field-label" for="custom-tidal-cost">Cost per unit (million USD)<span class="sr-only"> for Tidal Basin</span></label><input id="custom-tidal-cost" type="number" min="0" max="1000000000" step="any" inputmode="decimal" data-number="custom" data-tech="tidal" data-key="cost" placeholder="Not entered"></div><div><label class="field-label" for="custom-tidal-years">Schedule (years)<span class="sr-only"> for Tidal Basin</span></label><input id="custom-tidal-years" type="number" min="0.01" max="100" step="any" inputmode="decimal" data-number="custom" data-tech="tidal" data-key="years" placeholder="Not entered"></div></div></section><section class="custom-technology"><h3>Oil/Petroleum</h3><div class="custom-fields"><div><label class="field-label" for="custom-oil-mw">MW per unit<span class="sr-only"> for Oil/Petroleum</span></label><input id="custom-oil-mw" type="number" min="0.01" max="1000000000" step="any" inputmode="decimal" data-number="custom" data-tech="oil" data-key="mw" placeholder="Not entered"></div><div><label class="field-label" for="custom-oil-cost">Cost per unit (million USD)<span class="sr-only"> for Oil/Petroleum</span></label><input id="custom-oil-cost" type="number" min="0" max="1000000000" step="any" inputmode="decimal" data-number="custom" data-tech="oil" data-key="cost" placeholder="Not entered"></div><div><label class="field-label" for="custom-oil-years">Schedule (years)<span class="sr-only"> for Oil/Petroleum</span></label><input id="custom-oil-years" type="number" min="0.01" max="100" step="any" inputmode="decimal" data-number="custom" data-tech="oil" data-key="years" placeholder="Not entered"></div></div></section></div></details>
+      <p class="comparison-note">Energy costs are indicative estimates for the selected quantities. Schedule ranges assume overlapping work. Battery power is separate from generation.</p>
       <form id="challenge-form"><section class="decision-flow" aria-labelledby="decision-title"><p class="eyebrow">YOUR JUDGMENT</p><h2 id="decision-title">Make your recommendation</h2><p class="decision-intro">Use the timing limits and your comparison to decide what is credible for your assigned setting. Energy capacity alone does not shorten the course AI readiness timelines.</p><fieldset class="decision-group"><legend>How credible is the 2030 target?</legend><div class="choice-options" id="feasibility-options"></div></fieldset><div id="condition-field" class="condition-field" hidden><label class="field-label" for="condition">What key condition would need to be met?</label><input id="condition" maxlength="240" placeholder="One brief condition, if useful"></div></section></form>
+      <section class="counter-strip mw-comparison" aria-label="AI readiness energy needed comparison"><div class="field"><label class="field-label" for="prior-counter">Proposed AI Readiness Energy Needed (MW)</label><input class="mw-total-input" id="prior-counter" type="text" inputmode="decimal" maxlength="24" placeholder="Enter MW total" data-number="total" data-side="prior" aria-describedby="prior-basis"><span class="mw-basis" id="prior-basis"></span><button type="button" data-use-combination="prior">Use combination total</button></div><span class="counter-arrow" aria-hidden="true">→</span><div class="field"><label class="field-label" for="revised-counter">Newly Revised AI Readiness Energy Needed for 2030 (MW)</label><input class="mw-total-input" id="revised-counter" type="text" inputmode="decimal" maxlength="24" placeholder="Enter MW total" data-number="total" data-side="revised" aria-describedby="revised-basis"><span class="mw-basis" id="revised-basis"></span><button type="button" data-use-combination="revised">Use combination total</button></div></section>
       <div class="copy-feedback"><div class="hero-actions"><button type="button" id="copy-summary-bottom">Copy summary of responses</button></div><p id="copy-status" role="status"></p><div id="copy-fallback" hidden><label class="field-label" for="copy-text">Summary of responses — manual copy</label><p class="field-help" id="copy-help">Press Ctrl+C or Command+C to copy the selected text, or use your device’s Copy command.</p><textarea id="copy-text" readonly rows="10" aria-describedby="copy-help"></textarea></div></div>
     </main>
-    <footer class="site-footer"><p>AI Energy Lab / Student challenge</p><p>Save a copy before leaving. Nothing is submitted automatically.</p></footer>
+    <footer class="site-footer"><p>Save a copy before leaving. Nothing is submitted automatically.</p></footer>
   </div>
 </div>
 <section class="print-report" id="print-report" aria-label="Printable comparison"></section>
@@ -332,8 +354,8 @@
 })(typeof globalThis !== "undefined" ? globalThis : window);
 
 
-const APP_CONFIG={"student": true, "storageKey": "ai-readiness-acceleration-dashboard-student-v2", "legacyKey": "ai-readiness-student-explorer-v1"};
-const COURSE_DATA={"countries": ["Algeria", "Brazil", "Costa Rica", "France", "Ireland", "Japan", "Jordan", "Kenya", "Mexico", "Morocco", "Oman", "Pakistan", "South Korea", "Ukraine", "Venezuela", "Vietnam"], "technologies": [{"name": "Natural Gas (Combined Cycle)", "size": "200-800 MW", "minMW": 200, "maxMW": 800, "minCost": 200, "maxCost": 1300, "minYears": 2, "maxYears": 4, "kind": "generation"}, {"name": "Natural Gas Peaker", "size": "50-200 MW", "minMW": 50, "maxMW": 200, "minCost": 35, "maxCost": 240, "minYears": 1, "maxYears": 3, "kind": "generation"}, {"name": "Coal Plant", "size": "500-1,000 MW", "minMW": 500, "maxMW": 1000, "minCost": 5000, "maxCost": 10000, "minYears": 5, "maxYears": 10, "kind": "generation"}, {"name": "Nuclear (Large)", "size": "1,000-1,600 MW", "minMW": 1000, "maxMW": 1600, "minCost": 10000, "maxCost": 20000, "minYears": 8, "maxYears": 15, "kind": "generation"}, {"name": "Small Modular Reactor (SMR)", "size": "50-300 MW", "minMW": 50, "maxMW": 300, "minCost": 300, "maxCost": 3000, "minYears": 4, "maxYears": 7, "kind": "generation"}, {"name": "Solar PV (Utility)", "size": "50-300 MW", "minMW": 50, "maxMW": 300, "minCost": 80, "maxCost": 1200, "minYears": 1, "maxYears": 2, "kind": "generation"}, {"name": "Solar + Storage", "size": "100-500 MW", "minMW": 100, "maxMW": 500, "minCost": 200, "maxCost": 2500, "minYears": 1, "maxYears": 3, "kind": "hybrid"}, {"name": "Onshore Wind", "size": "100-300 MW", "minMW": 100, "maxMW": 300, "minCost": 170, "maxCost": 1100, "minYears": 2, "maxYears": 4, "kind": "generation"}, {"name": "Offshore Wind", "size": "300-1,000 MW", "minMW": 300, "maxMW": 1000, "minCost": 2500, "maxCost": 9000, "minYears": 5, "maxYears": 10, "kind": "generation"}, {"name": "Hydropower (Large Dam)", "size": "100-1,000+ MW", "minMW": 100, "maxMW": 1000, "minCost": 250, "maxCost": 16000, "minYears": 5, "maxYears": 10, "kind": "generation"}, {"name": "Geothermal", "size": "20-100 MW", "minMW": 20, "maxMW": 100, "minCost": 40, "maxCost": 500, "minYears": 3, "maxYears": 6, "kind": "generation"}, {"name": "Biomass / Waste-to-Energy", "size": "20-100 MW", "minMW": 20, "maxMW": 100, "minCost": 80, "maxCost": 500, "minYears": 3, "maxYears": 5, "kind": "generation"}, {"name": "Battery Storage (grid-scale)", "size": "50-300 MW", "minMW": 50, "maxMW": 300, "minCost": 65, "maxCost": 400, "minYears": 1, "maxYears": 2, "kind": "storage"}], "windowYears": 4, "states": ["Colorado", "Connecticut", "Maryland", "New York", "South Dakota", "Texas", "West Virginia"]};
+const APP_CONFIG={"student": true, "storageKey": "ai-readiness-acceleration-dashboard-student-v3", "legacyKey": "ai-readiness-student-explorer-v1", "previousKey": "ai-readiness-acceleration-dashboard-student-v2"};
+const COURSE_DATA={"countries": ["Algeria", "Brazil", "Costa Rica", "France", "Ireland", "Japan", "Jordan", "Kenya", "Mexico", "Morocco", "Oman", "Pakistan", "South Korea", "Ukraine", "Venezuela", "Vietnam"], "technologies": [{"name": "Natural Gas Plant", "size": "200-800 MW", "minMW": 200, "maxMW": 800, "minCost": 200, "maxCost": 1300, "minYears": 2, "maxYears": 4, "kind": "generation", "id": "gas", "legacyIndex": 0}, {"name": "Natural Gas Peaker", "size": "50-200 MW", "minMW": 50, "maxMW": 200, "minCost": 35, "maxCost": 240, "minYears": 1, "maxYears": 3, "kind": "generation", "id": "peaker", "legacyIndex": 1}, {"id": "oil", "name": "Oil/Petroleum", "custom": true, "kind": "generation", "size": null, "minMW": null, "maxMW": null, "minCost": null, "maxCost": null, "minYears": null, "maxYears": null}, {"name": "Coal Plant", "size": "500-1,000 MW", "minMW": 500, "maxMW": 1000, "minCost": 5000, "maxCost": 10000, "minYears": 5, "maxYears": 10, "kind": "generation", "id": "coal", "legacyIndex": 2}, {"name": "Nuclear (Large)", "size": "1,000-1,600 MW", "minMW": 1000, "maxMW": 1600, "minCost": 10000, "maxCost": 20000, "minYears": 8, "maxYears": 15, "kind": "generation", "id": "nuclear", "legacyIndex": 3}, {"name": "Small Modular Reactor (SMR)", "size": "50-300 MW", "minMW": 50, "maxMW": 300, "minCost": 300, "maxCost": 3000, "minYears": 4, "maxYears": 7, "kind": "generation", "id": "smr", "legacyIndex": 4}, {"name": "Solar", "size": "50-300 MW", "minMW": 50, "maxMW": 300, "minCost": 80, "maxCost": 1200, "minYears": 1, "maxYears": 2, "kind": "generation", "id": "solar", "legacyIndex": 5}, {"name": "Onshore Wind", "size": "100-300 MW", "minMW": 100, "maxMW": 300, "minCost": 170, "maxCost": 1100, "minYears": 2, "maxYears": 4, "kind": "generation", "id": "onshore", "legacyIndex": 7}, {"name": "Offshore Wind", "size": "300-1,000 MW", "minMW": 300, "maxMW": 1000, "minCost": 2500, "maxCost": 9000, "minYears": 5, "maxYears": 10, "kind": "generation", "id": "offshore", "legacyIndex": 8}, {"name": "Hydropower (Large Dam)", "size": "100-1,000+ MW", "minMW": 100, "maxMW": 1000, "minCost": 250, "maxCost": 16000, "minYears": 5, "maxYears": 10, "kind": "generation", "id": "hydro", "legacyIndex": 9}, {"id": "tidal", "name": "Tidal Basin", "custom": true, "kind": "generation", "size": null, "minMW": null, "maxMW": null, "minCost": null, "maxCost": null, "minYears": null, "maxYears": null}, {"name": "Geothermal", "size": "20-100 MW", "minMW": 20, "maxMW": 100, "minCost": 40, "maxCost": 500, "minYears": 3, "maxYears": 6, "kind": "generation", "id": "geothermal", "legacyIndex": 10}, {"name": "Biomass / Waste-to-Energy", "size": "20-100 MW", "minMW": 20, "maxMW": 100, "minCost": 80, "maxCost": 500, "minYears": 3, "maxYears": 5, "kind": "generation", "id": "biomass", "legacyIndex": 11}, {"name": "Battery Storage (grid-scale)", "size": "50-300 MW", "minMW": 50, "maxMW": 300, "minCost": 65, "maxCost": 400, "minYears": 1, "maxYears": 2, "kind": "storage", "id": "battery", "legacyIndex": 12}], "windowYears": 4, "states": ["Colorado", "Connecticut", "Maryland", "New York", "South Dakota", "Texas", "West Virginia"]};
 const CHOICES={feasibility:{heading:'Judgment about the target',options:[
     {id:'credible',label:'The target is credible',hint:'The evidence supports the readiness level and energy mix you recommend.',advice:'The 2030 target is credible for the AI readiness level and energy mix recommended.'},
     {id:'conditional',label:'It depends on key conditions',hint:'Identify the most important condition when explaining your recommendation.',advice:'The 2030 target is credible only if the key conditions identified in the recommendation are met.'},
@@ -344,193 +366,207 @@ const $=id=>document.getElementById(id);
 const esc=value=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const n=ReadinessModel.formatNumber,money=ReadinessModel.formatMoney;
 const clone=value=>JSON.parse(JSON.stringify(value));
-const eligible=tech=>tech.maxYears<=COURSE_DATA.windowYears;
-const eligibleAI=ReadinessModel.LEVELS.filter(level=>level.years[1]<=COURSE_DATA.windowYears);
+const technologies=COURSE_DATA.technologies;
+const byId=new Map(technologies.map(t=>[t.id,t]));
+const sides=['prior','revised'];
 const listFor=scope=>scope==='state'&&APP_CONFIG.student?COURSE_DATA.states:COURSE_DATA.countries;
-const validCount=(value,max)=>Number.isInteger(value)&&value>=0&&value<=max;
-const zeros=()=>COURSE_DATA.technologies.map(()=>0);
+const quantities=()=>Object.fromEntries(technologies.map(t=>[t.id,0]));
 const emptyAI=()=>ReadinessModel.createState(false).facilities;
-function freshCase(){return {ai:emptyAI(),quantities:zeros(),revisedAI:emptyAI(),revisedQuantities:zeros(),schedule:'',cost:'',feasibility:'',condition:'',entered:false};}
-function freshDraft(){return {version:2,scope:'country',locations:{country:'',state:''},cases:{country:{'':freshCase()},state:{'':freshCase()}}};}
-function normalizeCase(candidate,legacy=false){
-  const result=freshCase();if(!candidate||typeof candidate!=='object')return result;
-  const check=ReadinessModel.validateFacilities(candidate.ai);if(check.valid)result.ai=check.facilities;
-  const quantities=value=>Array.isArray(value)&&value.length===COURSE_DATA.technologies.length?value.map(q=>validCount(q,9999)?q:0):zeros();
-  result.quantities=quantities(candidate.quantities);
-  const revised=ReadinessModel.validateFacilities(candidate.revisedAI);if(revised.valid)result.revisedAI=revised.facilities;
-  for(const level of ReadinessModel.LEVELS)if(!eligibleAI.includes(level))result.revisedAI[level.id].count=0;
-  result.revisedQuantities=quantities(candidate.revisedQuantities).map((q,i)=>eligible(COURSE_DATA.technologies[i])?q:0);
-  for(const key of ['schedule','cost','condition'])if(typeof candidate[key]==='string')result[key]=candidate[key].slice(0,key==='condition'?240:120);
-  if(CHOICES.feasibility.options.some(o=>o.id===candidate.feasibility))result.feasibility=candidate.feasibility;
-  result.entered=legacy?check.valid:candidate.entered===true;
-  return result;
+const validCount=value=>Number.isInteger(value)&&value>=0&&value<=9999;
+const validCustom=(key,value)=>Number.isFinite(value)&&value>=0&&(key==='mw'?value>0&&value<=1e9:key==='years'?value>0&&value<=100:value<=1e9);
+function freshCase(){return {ai:emptyAI(),revisedAI:emptyAI(),quantities:quantities(),revisedQuantities:quantities(),custom:{tidal:{mw:null,cost:null,years:null},oil:{mw:null,cost:null,years:null}},override:{prior:null,revised:null},entered:false,revisedEntered:false,feasibility:'',condition:'',records:{schedule:'',cost:''},removedHybrid:false};}
+function freshDraft(){return {version:3,scope:'country',locations:{country:'',state:''},cases:{country:{'':freshCase()},state:{'':freshCase()}}};}
+function normalizeCase(candidate,version){
+ const result=freshCase();if(!candidate||typeof candidate!=='object')return result;
+ for(const key of ['ai','revisedAI']){const checked=ReadinessModel.validateFacilities(candidate[key]);if(checked.valid)result[key]=checked.facilities;}
+ for(const key of ['quantities','revisedQuantities'])for(const tech of technologies){
+  const value=Array.isArray(candidate[key])?candidate[key][tech.legacyIndex]:candidate[key]?.[tech.id];
+  result[key][tech.id]=validCount(value)?value:0;
+  if(key==='revisedQuantities'&&!tech.custom&&tech.maxYears>COURSE_DATA.windowYears)result[key][tech.id]=0;
+ }
+ if(version<3&&Array.isArray(candidate.quantities))result.removedHybrid=(candidate.quantities[6]??0)>0||(candidate.revisedQuantities?.[6]??0)>0;
+ else result.removedHybrid=candidate.removedHybrid===true;
+ for(const tech of technologies.filter(t=>t.custom))for(const key of ['mw','cost','years']){
+  const value=candidate.custom?.[tech.id]?.[key];result.custom[tech.id][key]=validCustom(key,value)?value:null;
+ }
+ for(const side of sides){const value=candidate.override?.[side];result.override[side]=Number.isFinite(value)&&value>=0&&value<=1e12?value:null;}
+ result.entered=candidate.entered===true||(version===1&&ReadinessModel.validateFacilities(candidate.ai).valid);
+ result.revisedEntered=candidate.revisedEntered===true||Object.values(result.revisedAI).some(row=>row.count>0);
+ if(CHOICES.feasibility.options.some(o=>o.id===candidate.feasibility))result.feasibility=candidate.feasibility;
+ if(typeof candidate.condition==='string')result.condition=candidate.condition.slice(0,240);
+ for(const key of ['schedule','cost']){const value=version<3?candidate[key]:candidate.records?.[key];if(typeof value==='string')result.records[key]=value.slice(0,120);}
+ return result;
 }
-function normalizeDraft(candidate,legacy=false){
-  const result=freshDraft();if(!candidate||typeof candidate!=='object')return result;
-  if(!legacy&&candidate.version!==2)return result;
-  if(legacy&&candidate.version!==1)return result;
-  const scopes=APP_CONFIG.student?['country','state']:['country'];
-  if(scopes.includes(candidate.scope))result.scope=candidate.scope;
-  for(const scope of scopes){
-    const oldCases=legacy&&!APP_CONFIG.student?candidate.cases:candidate.cases?.[scope];
-    for(const location of ['',...listFor(scope)])if(oldCases&&Object.hasOwn(oldCases,location))result.cases[scope][location]=normalizeCase(oldCases[location],legacy);
-    const selected=legacy&&!APP_CONFIG.student?candidate.country:candidate.locations?.[scope];
-    if(listFor(scope).includes(selected))result.locations[scope]=selected;
-    if(!Object.hasOwn(result.cases[scope],result.locations[scope]))result.cases[scope][result.locations[scope]]=freshCase();
-  }
-  return result;
+function normalizeDraft(candidate){
+ const result=freshDraft();if(!candidate||![1,2,3].includes(candidate.version)||!candidate.cases)return result;
+ const scopes=APP_CONFIG.student?['country','state']:['country'];
+ if(scopes.includes(candidate.scope))result.scope=candidate.scope;
+ for(const scope of scopes){
+  const pool=candidate.version===1&&!APP_CONFIG.student?candidate.cases:candidate.cases?.[scope];
+  for(const place of ['',...listFor(scope)])if(pool&&Object.hasOwn(pool,place))result.cases[scope][place]=normalizeCase(pool[place],candidate.version);
+  const place=candidate.version===1&&!APP_CONFIG.student?candidate.country:candidate.locations?.[scope];
+  if(listFor(scope).includes(place))result.locations[scope]=place;
+  if(!Object.hasOwn(result.cases[scope],result.locations[scope]))result.cases[scope][result.locations[scope]]=freshCase();
+ }
+ return result;
 }
 let draft=freshDraft(),errors=[],copyRequest=0;
 const current=()=>draft.cases[draft.scope][draft.locations[draft.scope]];
-const locationLabel=()=>draft.scope==='state'?'Assigned U.S. state':'Assigned country';
 const selectedLocation=()=>draft.locations[draft.scope];
-const complete=()=>!!selectedLocation()&&current().entered&&!!current().feasibility&&!errors.length;
-function save(){try{window.localStorage.setItem(APP_CONFIG.storageKey,JSON.stringify(draft));$('save-status').textContent='Your valid comparison is saved in this browser for this location.';}catch{$('save-status').textContent='Browser saving is unavailable. Copy your summary or save a PDF before leaving.';}}
-function load(){
-  try{
-    const saved=window.localStorage.getItem(APP_CONFIG.storageKey);
-    if(saved){const parsed=JSON.parse(saved);if(parsed?.version!==2||!parsed.cases)throw Error('Invalid saved comparison');draft=normalizeDraft(parsed);$('save-status').textContent='Your saved comparison is ready.';return;}
-    const old=window.localStorage.getItem(APP_CONFIG.legacyKey);
-    if(old){const parsed=JSON.parse(old);if(parsed?.version!==1||!parsed.cases)throw Error('Invalid earlier scenario');draft=normalizeDraft(parsed,true);$('save-status').textContent='Your saved Acceleration Challenge inputs are shown on the left. Confirm them before revising; the other course apps do not transfer entries.';}
-  }catch{$('save-status').textContent='Starting fresh. Copy your summary or save a PDF to keep your work.';}
-}
-function calculate(ai,quantities){
-  const demand=ReadinessModel.calculate(ai);
-  const totals={generation:[0,0],storage:[0,0],hybrid:[0,0]},cost=[0,0],years=[0,0];
-  const selected=[];
-  quantities.forEach((q,i)=>{if(!q)return;const tech=COURSE_DATA.technologies[i];
-    totals[tech.kind][0]+=q*tech.minMW;totals[tech.kind][1]+=q*tech.maxMW;
-    cost[0]+=q*tech.minCost;cost[1]+=q*tech.maxCost;
-    years[0]=Math.max(years[0],tech.minYears);years[1]=Math.max(years[1],tech.maxYears);
-    selected.push({tech,index:i,quantity:q});
-  });
-  return {demand,totals,cost,years,selected,open: selected.some(r=>r.tech.kind==='generation'&&r.tech.size.includes('+'))};
-}
-const span=values=>n(values[0])+(values[0]===values[1]?'':'–'+n(values[1]));
-const mw=(values,open=false)=>span(values)+(open?'+':'')+' MW';
+const locationLabel=()=>draft.scope==='state'?'Assigned U.S. state':'Assigned country';
+const range=values=>n(values[0])+(values[0]===values[1]?'':'–'+n(values[1]));
+const mw=values=>range(values)+' MW';
 const dollars=values=>money(values[0])+(values[0]===values[1]?'':'–'+money(values[1]));
-const aiText=result=>result.demand.rows.filter(r=>r.count>0).map(r=>n(r.count)+' '+r.level.label.toLowerCase()+' × '+n(r.mw)+' MW').join(' + ')||'No AI demand units recorded';
-function clearCopy(){copyRequest++;$('copy-fallback').hidden=true;$('copy-text').value='';$('copy-status').textContent='';}
-function buildAI(){
-  const rows=(side,levels)=>levels.map(level=>`<tr><th scope="row">${esc(level.label)}<small>${esc(level.power)}</small></th><td><label class="sr-only" for="${side}-count-${level.id}">${side==='prior'?'Earlier':'Revised'} ${level.label} AI count</label><input id="${side}-count-${level.id}" type="number" data-number="count" data-side="${side}" data-level="${level.id}" min="0" max="1000" step="1" inputmode="numeric"></td><td><label class="sr-only" for="${side}-mw-${level.id}">MW per ${side==='prior'?'earlier':'revised'} ${level.label} AI demand unit</label><input id="${side}-mw-${level.id}" type="number" data-number="mw" data-side="${side}" data-level="${level.id}" min="0.01" max="1000000" step="0.01" inputmode="decimal"></td></tr>`).join('');
-  $('prior-ai').innerHTML=rows('prior',ReadinessModel.LEVELS);
-  $('ai-timing').innerHTML=eligibleAI.length?'<p>Only the AI levels whose full course horizon fits four years are available below.</p>':'<p><strong>No new AI readiness level fits the full four-year course timeline.</strong></p><ul>'+ReadinessModel.LEVELS.map(l=>`<li>${esc(l.label)}: ${l.years.join('–')} years</li>`).join('')+'</ul><p>Even low AI starts at five years. Reducing MW alone does not shorten these timelines. Your recommendation may need more time; faster energy options alone do not establish AI readiness by 2030.</p>';
-  $('revised-ai').innerHTML=eligibleAI.length?'<div class="table-scroll"><table class="input-table"><caption>Eligible AI demand</caption><thead><tr><th scope="col">Level</th><th scope="col">Count</th><th scope="col">MW each</th></tr></thead><tbody>'+rows('revised',eligibleAI)+'</tbody></table></div>':'';
+function getTechnology(plan,tech){
+ if(!tech.custom)return tech;
+ const value=plan.custom[tech.id];return {...tech,minMW:value.mw,maxMW:value.mw,minCost:value.cost,maxCost:value.cost,minYears:value.years,maxYears:value.years};
 }
+function fits(plan,tech){const actual=getTechnology(plan,tech);return actual.maxYears!==null&&actual.maxYears<=COURSE_DATA.windowYears;}
+function calculate(plan,side){
+ const ai=ReadinessModel.calculate(side==='prior'?plan.ai:plan.revisedAI),values=side==='prior'?plan.quantities:plan.revisedQuantities;
+ const generation=[0,0],storage=[0,0],cost=[0,0],years=[0,0],missing={generation:[],storage:[],cost:[],years:[]},selected=[];
+ for(const base of technologies){const quantity=values[base.id];if(!quantity)continue;const tech=getTechnology(plan,base);selected.push({tech,quantity});
+  const power=tech.kind==='storage'?storage:generation;
+  if(tech.minMW===null)missing[tech.kind].push(tech.name);else{power[0]+=quantity*tech.minMW;power[1]+=quantity*tech.maxMW;}
+  if(tech.minCost===null)missing.cost.push(tech.name);else{cost[0]+=quantity*tech.minCost;cost[1]+=quantity*tech.maxCost;}
+  if(tech.minYears===null)missing.years.push(tech.name);else{years[0]=Math.max(years[0],tech.minYears);years[1]=Math.max(years[1],tech.maxYears);}
+ }
+ return {ai,demand:plan.override[side]??ai.totalMW,basis:plan.override[side]===null?'Combination of levels':'Entered MW total',generation,storage,cost,years,missing,selected,open:selected.some(({tech})=>tech.kind==='generation'&&tech.size?.includes('+'))};
+}
+function complete(){const plan=current();return !!selectedLocation()&&plan.entered&&plan.revisedEntered&&!!plan.feasibility&&!errors.length&&sides.every(side=>Object.values(calculate(plan,side).missing).every(list=>!list.length));}
+function save(){try{window.localStorage.setItem(APP_CONFIG.storageKey,JSON.stringify(draft));$('save-status').textContent='Saved in this browser for this location.';}catch{$('save-status').textContent='Browser saving is unavailable. Copy your summary or save a PDF before leaving.';}}
+function load(){
+ try{for(const key of [APP_CONFIG.storageKey,APP_CONFIG.previousKey,APP_CONFIG.legacyKey]){
+  const raw=window.localStorage.getItem(key);if(!raw)continue;const value=JSON.parse(raw);if(![1,2,3].includes(value?.version)||!value.cases)continue;
+  draft=normalizeDraft(value);$('save-status').textContent=value.version===3?'Your saved comparison is ready.':'Your earlier Acceleration Challenge entries are restored. Review them before revising.';return;
+ }}catch{$('save-status').textContent='Starting fresh. Copy your summary or save a PDF to keep your work.';}
+}
+function clearCopy(){copyRequest++;$('copy-fallback').hidden=true;$('copy-text').value='';$('copy-status').textContent='';}
+function rowsForAI(side){return ReadinessModel.LEVELS.map(level=>`<tr><th scope="row">${esc(level.label)}<small>${esc(level.power)}</small></th><td><label class="sr-only" for="${side}-count-${level.id}">${side==='prior'?'Proposed':'Revised'} ${esc(level.label)} AI count</label><input id="${side}-count-${level.id}" type="number" min="0" max="1000" step="1" inputmode="numeric" data-number="count" data-side="${side}" data-level="${level.id}"></td><td><label class="sr-only" for="${side}-mw-${level.id}">MW per ${esc(level.label)} AI demand unit, ${side==='prior'?'proposed':'revised'}</label><input id="${side}-mw-${level.id}" type="number" min="0.01" max="1000000" step="0.01" inputmode="decimal" data-number="mw" data-side="${side}" data-level="${level.id}"></td></tr>`).join('');}
+function buildAI(){for(const side of sides)$(side+'-ai').innerHTML=rowsForAI(side);}
+function techDescription(tech){return (tech.minMW===null?'MW not entered':mw([tech.minMW,tech.maxMW]))+' · '+(tech.minCost===null?'cost not entered':dollars([tech.minCost,tech.maxCost]))+' per unit · '+(tech.minYears===null?'schedule not entered':range([tech.minYears,tech.maxYears])+' years');}
 function buildEnergy(side){
-  const values=side==='prior'?current().quantities:current().revisedQuantities;
-  const available=COURSE_DATA.technologies.map((tech,index)=>({tech,index})).filter(({tech,index})=>!values[index]&&(side==='prior'||eligible(tech)));
-  $(side+'-picker').innerHTML='<option value="">Choose a technology</option>'+available.map(({tech,index})=>`<option value="${index}">${esc(tech.name)} · ${tech.minYears}–${tech.maxYears} years</option>`).join('');
-  $(side+'-picker').value='';
-  $(side+'-energy').innerHTML=values.some(q=>q>0)?COURSE_DATA.technologies.map((tech,index)=>!values[index]?'':`<div class="technology-row"><div><strong>${esc(tech.name)}</strong><small id="${side}-tech-help-${index}">${esc(tech.size)} per unit · ${tech.minYears}–${tech.maxYears} years · ${dollars([tech.minCost,tech.maxCost])} per unit</small></div><label for="${side}-tech-${index}">Quantity<input id="${side}-tech-${index}" type="number" min="0" max="9999" step="1" value="${values[index]}" inputmode="numeric" data-number="technology" data-side="${side}" data-index="${index}" aria-describedby="${side}-tech-help-${index}"></label><button type="button" class="remove-technology" data-remove="${index}" data-side="${side}" aria-label="Remove ${esc(tech.name)} from ${side==='prior'?'earlier':'revised'} mix">Remove</button></div>`).join(''):'<p class="empty-energy">No technologies selected.</p>';
+ const plan=current(),values=side==='prior'?plan.quantities:plan.revisedQuantities;
+ $(side+'-picker').innerHTML='<option value="">Choose a technology</option>'+technologies.filter(t=>!values[t.id]).map(base=>{const tech=getTechnology(plan,base),disabled=side==='revised'&&tech.maxYears!==null&&!fits(plan,base);return `<option value="${tech.id}"${disabled?' disabled':''}>${esc(tech.name)}${disabled?' — outside four-year window':tech.custom&&tech.maxYears===null?' — enter assessment values':''}</option>`;}).join('');
+ $(side+'-picker').value='';
+ $(side+'-energy').innerHTML=technologies.filter(t=>values[t.id]>0).map(base=>{const tech=getTechnology(plan,base);return `<div class="technology-row"><div><strong>${esc(tech.name)}</strong><small id="${side}-tech-help-${tech.id}">${esc(techDescription(tech))}</small>${tech.custom?'<small>Learner-entered technology assessment values</small>':''}</div><label for="${side}-tech-${tech.id}">Quantity<input id="${side}-tech-${tech.id}" type="number" min="0" max="9999" step="1" value="${values[tech.id]}" inputmode="numeric" data-number="technology" data-side="${side}" data-index="${tech.id}" aria-describedby="${side}-tech-help-${tech.id}"></label><button type="button" class="remove-technology" data-remove="${tech.id}" data-side="${side}" aria-label="Remove ${esc(tech.name)} from ${side==='prior'?'proposed':'revised'} energy combination">Remove</button></div>`;}).join('')||'<p class="empty-energy">No technologies selected.</p>';
 }
 function renderChoices(){for(const option of CHOICES.feasibility.options){const selected=current().feasibility===option.id;$('feasibility-'+option.id).checked=selected;$('card-feasibility-'+option.id).classList.toggle('selected',selected);}$('condition-field').hidden=current().feasibility!=='conditional';}
-function resultHTML(result){return result.selected.length?`<p><strong>Generation nameplate:</strong> ${mw(result.totals.generation,result.open)}</p>${result.totals.storage[1]?`<p><strong>Storage power, separate:</strong> ${mw(result.totals.storage)}</p>`:''}${result.totals.hybrid[1]?`<p><strong>Combined solar/storage, unsplit:</strong> ${mw(result.totals.hybrid)}</p>`:''}<p><strong>Illustrative energy investment:</strong> ${dollars(result.cost)}</p><p><strong>Longest course energy schedule:</strong> ${span(result.years)} years</p>`:'<p>No energy range calculated until you select a technology.</p>';}
+function metric(result,key){
+ const formatter=key==='cost'?dollars:key==='years'?v=>range(v)+' years':mw;
+ if(result.missing[key].length)return 'Incomplete — missing '+(key==='years'?'schedule':key==='cost'?'cost':'MW')+' for '+result.missing[key].join(', ')+'. Known '+(key==='years'?'schedule range':key==='cost'?'cost subtotal':'capacity subtotal')+': '+formatter(result[key]);
+ return key==='generation'&&result.open?range(result[key])+'+ MW':formatter(result[key]);
+}
+function resultLines(result){
+ if(!result.selected.length)return ['Select an energy technology to calculate energy estimates.'];
+ const lines=['Selected generation capacity: '+metric(result,'generation')];
+ if(result.storage[1]||result.missing.storage.length)lines.push('Battery power, separate from generation: '+metric(result,'storage'));
+ lines.push('Indicative energy cost: '+metric(result,'cost'),'Energy technology schedule: '+metric(result,'years'));
+ return lines;
+}
 function renderResults(){
-  const plan=current(),prior=calculate(plan.ai,plan.quantities),revised=calculate(plan.revisedAI,plan.revisedQuantities);
-  $('prior-counter').textContent=plan.entered?n(prior.demand.totalMW)+' MW':'—';
-  $('revised-counter').textContent=revised.selected.some(r=>r.tech.kind==='generation')?mw(revised.totals.generation,revised.open):'—';
-  $('prior-totals').innerHTML=`<p><strong>Earlier AI power:</strong> ${plan.entered?n(prior.demand.totalMW)+' MW':'Not entered'}</p>`+resultHTML(prior)+(prior.demand.rows.some(r=>r.count>0&&r.outsideReference)?'<p>Custom MW outside a course category changes power demand only; the AI timeline is unchanged.</p>':'');
-  $('revised-totals').innerHTML=(eligibleAI.length?`<p><strong>Revised AI power:</strong> ${n(revised.demand.totalMW)} MW</p>`:'<p><strong>New AI level by 2030:</strong> none fits the course timelines.</p>')+resultHTML(revised);
-  renderChoices();
+ const plan=current();for(const side of sides){
+  const result=calculate(plan,side);$(side+'-totals').innerHTML=resultLines(result).map(line=>'<p>'+esc(line)+'</p>').join('');
+  const field=$(side+'-counter'),entered=side==='prior'?plan.entered:plan.revisedEntered;
+  if(document.activeElement!==field)field.value=entered?String(result.demand):'';
+  $(side+'-basis').textContent=entered?result.basis:'Enter your MW total or use the combination above.';
+ }
+ const result=calculate(plan,'revised');
+ const outside=result.selected.filter(({tech})=>tech.maxYears!==null&&tech.maxYears>COURSE_DATA.windowYears).map(r=>r.tech.name);
+ $('energy-timing').textContent=!result.selected.length?'Select energy technologies to check the four-year target.':outside.length?'Outside the four-year window: '+outside.join(', ')+'.':result.missing.years.length?'Timing cannot be checked until the missing schedules are entered.':'The selected energy schedules fit the four-year window.';
+ const selectedLevels=ReadinessModel.LEVELS.filter(level=>plan.revisedAI[level.id].count>0);
+ $('ai-timing').textContent=selectedLevels.length?'Course AI planning horizons: '+selectedLevels.map(l=>l.label+' '+l.years.join('–')+' years').join('; ')+'. Compare these with the four-year target.':plan.override.revised!==null?'Revised MW target entered. Use your assessment to judge its timing.':'Record the revised combination or enter your revised MW target below. Assess its timing separately.';
+ $('migration-note').hidden=!plan.removedHybrid;
+ renderChoices();
 }
 function sync(){
-  if(APP_CONFIG.student)$('scope').value=draft.scope;
-  $('location-label').textContent=locationLabel();
-  $('location').innerHTML='<option value="">Choose a '+(draft.scope==='state'?'state':'country')+'</option>'+listFor(draft.scope).map(name=>`<option value="${esc(name)}">${esc(name)}</option>`).join('');$('location').value=selectedLocation();
-  buildAI();
-  for(const side of ['prior','revised']){
-    const ai=side==='prior'?current().ai:current().revisedAI;
-    for(const level of ReadinessModel.LEVELS)if($(side+'-count-'+level.id)){$(side+'-count-'+level.id).value=ai[level.id].count;$(side+'-mw-'+level.id).value=ai[level.id].mw;}
-    buildEnergy(side);
-  }
-  $('prior-schedule').value=current().schedule;$('prior-cost').value=current().cost;$('condition').value=current().condition;
-  errors=[];$('input-errors').hidden=true;$('input-errors').textContent='';$('filter-status').textContent='';
-  $('excluded-timing').textContent='Outside the full four-year window: '+COURSE_DATA.technologies.filter(t=>!eligible(t)).map(t=>t.name+' ('+t.minYears+'–'+t.maxYears+' years)').join('; ')+'.';
-  renderResults();
+ if(APP_CONFIG.student)$('scope').value=draft.scope;
+ $('location-label').textContent=locationLabel();$('location').innerHTML='<option value="">Choose a '+(draft.scope==='state'?'state':'country')+'</option>'+listFor(draft.scope).map(name=>`<option value="${esc(name)}">${esc(name)}</option>`).join('');$('location').value=selectedLocation();
+ buildAI();for(const side of sides){const ai=side==='prior'?current().ai:current().revisedAI;for(const level of ReadinessModel.LEVELS){$(side+'-count-'+level.id).value=ai[level.id].count;$(side+'-mw-'+level.id).value=ai[level.id].mw;}buildEnergy(side);}
+ for(const tech of technologies.filter(t=>t.custom))for(const key of ['mw','cost','years'])$('custom-'+tech.id+'-'+key).value=current().custom[tech.id][key]??'';
+ $('condition').value=current().condition;errors=[];$('input-errors').hidden=true;$('filter-status').textContent='';clearCopy();renderResults();
 }
-function readNumbers(markPrior=false){
-  const candidate=clone(current());errors=[];
-  for(const field of document.querySelectorAll('[data-number]')){
-    const value=field.value.trim()===''?NaN:Number(field.value),type=field.dataset.number;
-    const valid=type==='mw'?Number.isFinite(value)&&value>=.01&&value<=1000000&&Math.abs(value*100-Math.round(value*100))<.00001:validCount(value,type==='count'?1000:9999);
-    field.setAttribute('aria-invalid',valid?'false':'true');
-    const help=type==='technology'?field.dataset.side+'-tech-help-'+field.dataset.index:'';
-    const described=[help,valid?'':'input-errors'].filter(Boolean).join(' ');
-    if(described)field.setAttribute('aria-describedby',described);else field.removeAttribute('aria-describedby');
-    if(!valid){errors.push(field.id+': '+(type==='mw'?'enter MW from 0.01 to 1,000,000, with at most two decimal places.':'enter a whole number from 0 to '+(type==='count'?'1,000.':'9,999.')));continue;}
-    if(type==='technology')candidate[field.dataset.side==='prior'?'quantities':'revisedQuantities'][Number(field.dataset.index)]=value;
-    else candidate[field.dataset.side==='prior'?'ai':'revisedAI'][field.dataset.level][type==='mw'?'mw':'count']=value;
+function parsedTotal(text){const clean=text.trim().replace(/,/g,'').replace(/\s*MW$/i,'').trim();return /^(?:\d+(?:\.\d{0,2})?|\.\d{1,2})$/.test(clean)?Number(clean):NaN;}
+function readNumbers(edited=null){
+ const candidate=clone(current());errors=[];
+ for(const field of document.querySelectorAll('[data-number]')){
+  const type=field.dataset.number,raw=field.value.trim(),value=type==='total'?parsedTotal(raw):raw===''?NaN:Number(raw);
+  let valid=true;
+  if(type==='custom'){
+   valid=raw===''||validCustom(field.dataset.key,value);
+   if(valid)candidate.custom[field.dataset.tech][field.dataset.key]=raw===''?null:value;
+  }else if(type==='total'){
+   valid=raw===''||(Number.isFinite(value)&&value>=0&&value<=1e12);
+   if(valid&&field===edited){candidate.override[field.dataset.side]=raw===''?null:value;candidate[field.dataset.side==='prior'?'entered':'revisedEntered']=raw!==''||candidate[field.dataset.side==='prior'?'entered':'revisedEntered'];}
+  }else if(type==='technology'){
+   valid=validCount(value);if(valid)candidate[field.dataset.side==='prior'?'quantities':'revisedQuantities'][field.dataset.index]=value;
+  }else{
+   valid=type==='count'?Number.isInteger(value)&&value>=0&&value<=1000:Number.isFinite(value)&&value>=.01&&value<=1e6&&Math.abs(value*100-Math.round(value*100))<.00001;
+   if(valid)candidate[field.dataset.side==='prior'?'ai':'revisedAI'][field.dataset.level][type==='count'?'count':'mw']=value;
+   if(valid&&field===edited){candidate.override[field.dataset.side]=null;candidate[field.dataset.side==='prior'?'entered':'revisedEntered']=true;}
   }
-  $('input-errors').hidden=errors.length===0;$('input-errors').textContent=errors.length?'Invalid numeric edits are excluded. Results, copies, and saved work use the last valid numeric inputs. '+errors.join(' '):'';
-  if(errors.length){renderResults();return false;}
-  candidate.entered=candidate.entered||markPrior;draft.cases[draft.scope][selectedLocation()]=candidate;renderResults();save();return true;
+  field.setAttribute('aria-invalid',valid?'false':'true');
+  const help=type==='total'?field.dataset.side+'-basis':type==='technology'?field.dataset.side+'-tech-help-'+field.dataset.index:'';
+  const described=[help,valid?'':'input-errors'].filter(Boolean).join(' ');
+  if(described)field.setAttribute('aria-describedby',described);else field.removeAttribute('aria-describedby');
+  if(!valid)errors.push(field.id+': enter a valid nonnegative number'+(type==='count'||type==='technology'?' of whole units.':'.'));
+ }
+ $('input-errors').hidden=!errors.length;$('input-errors').textContent=errors.length?'Check the highlighted entries. Results and saved work use the last valid values. '+errors.join(' '):'';
+ if(errors.length){renderResults();return false;}
+ draft.cases[draft.scope][selectedLocation()]=candidate;
+ if(edited?.dataset.number==='custom')for(const side of sides)buildEnergy(side);
+ renderResults();save();return true;
 }
-function energyLines(result){return result.selected.length?result.selected.map(({tech,quantity})=>`${tech.name} × ${n(quantity)}; ${tech.size} per unit; ${tech.minYears}–${tech.maxYears} years; ${dollars([quantity*tech.minCost,quantity*tech.maxCost])} illustrative investment`):['No energy technologies selected.'];}
-function totalsLines(result){return result.selected.length?['Generation nameplate: '+mw(result.totals.generation,result.open),'Standalone storage power (separate): '+mw(result.totals.storage),'Unsplit solar/storage power (separate): '+mw(result.totals.hybrid),'Illustrative energy investment: '+dollars(result.cost),'Longest course energy schedule: '+span(result.years)+' years']:['No energy range calculated.'];}
+function energyLines(result){return result.selected.length?result.selected.map(({tech,quantity})=>tech.name+' × '+n(quantity)+'; '+techDescription(tech)+(tech.custom?' (learner-entered values)':'')):['No energy technologies selected.'];}
+function aiLines(plan,side,result){const entered=side==='prior'?plan.entered:plan.revisedEntered;return [
+ (side==='prior'?'Proposed':'Newly revised for 2030')+' AI readiness energy needed: '+(entered?n(result.demand)+' MW':'Not entered'),
+ 'MW basis: '+result.basis,
+ ...result.ai.rows.filter(r=>r.count>0).map(r=>r.level.label+': '+n(r.count)+' × '+n(r.mw)+' MW = '+n(r.totalMW)+' MW')];}
 function responseSummaryText(){
-  const plan=current(),prior=calculate(plan.ai,plan.quantities),revised=calculate(plan.revisedAI,plan.revisedQuantities);
-  const lines=['THE 2030 ACCELERATION CHALLENGE — SUMMARY OF RESPONSES',APP_CONFIG.student?'Student version':'Country version',locationLabel()+': '+(selectedLocation()||'Not selected'),'Status: '+(complete()?'Recommendation for review':'Draft responses'),'New target: December 31, 2030','Simulation start: January 2027; four-year full-range timing rule'];
-  if(errors.length)lines.push('INVALID NUMERIC EDITS EXCLUDED — last valid numeric inputs used.',...errors);
-  lines.push('','EARLIER DECISIONS',plan.entered?'Earlier inputs recorded.':'Earlier inputs not yet entered.');
-  for(const row of prior.demand.rows)lines.push(row.level.label+': '+n(row.count)+' × '+n(row.mw)+' MW = '+n(row.totalMW)+' MW'+(row.count&&row.outsideReference?' (custom MW outside the course category)':''));
-  lines.push('Earlier AI power: '+(plan.entered?n(prior.demand.totalMW)+' MW':'Not entered'),'Earlier final schedule (entered): '+(plan.schedule.trim()||'Not provided'),'Earlier final cost estimate (entered): '+(plan.cost.trim()||'Not provided'),...energyLines(prior),...totalsLines(prior),'','REVISED FOR 2030');
-  if(!eligibleAI.length)lines.push('No new AI level fits the full four-year course horizon. Low: 5–10 years; Medium: 10–15 years; High: 15–20 years. Reducing MW alone does not shorten these timelines.');
-  else lines.push('Revised AI mix: '+aiText(revised),'Revised AI power: '+n(revised.demand.totalMW)+' MW');
-  lines.push(...energyLines(revised),...totalsLines(revised),'','TARGET CREDIBILITY',CHOICES.feasibility.options.find(o=>o.id===plan.feasibility)?.advice??'Not selected');
-  if(plan.feasibility==='conditional')lines.push('Key condition: '+(plan.condition.trim()||'Not provided'));
-  lines.push('','COURSE BASIS','Energy choices on the revised side include only full course schedules of four years or less. Small modular reactor timing remains 4–7 years, so it is not an eligible 2030 energy choice. The 2027 design milestone is hypothetical.','Course ranges are indicative and use the same values for every location. Nameplate MW is not dependable output or proof of readiness. Storage and unsplit solar/storage are separate from generation.','Energy investment adds quantity × course cost endpoints as an illustrative scenario, not a factual linear scaling relationship. Schedule ranges use the longest selected range, assuming overlapping work. No annual electricity cost or combined AI-and-energy investment is calculated.','Earlier final schedule and cost are learner-entered records; calculated energy ranges are shown separately. Other course apps do not transfer entries automatically.');
-  return lines.join('\n');
+ const plan=current(),prior=calculate(plan,'prior'),revised=calculate(plan,'revised');
+ const lines=['THE 2030 ACCELERATION CHALLENGE — SUMMARY OF RESPONSES',APP_CONFIG.student?'Student version':'Country version',locationLabel()+': '+(selectedLocation()||'Not selected'),'Status: '+(complete()?'Recommendation for review':'Draft responses'),'New target: December 31, 2030','Simulation start: January 2027'];
+ if(errors.length)lines.push('INVALID EDITS EXCLUDED — last valid values used.',...errors);
+ lines.push('','PROPOSED AI READINESS',...aiLines(plan,'prior',prior),...energyLines(prior),...resultLines(prior),'','NEWLY REVISED FOR 2030',...aiLines(plan,'revised',revised),...energyLines(revised),...resultLines(revised),$('energy-timing').textContent,$('ai-timing').textContent);
+ if(plan.records.schedule||plan.records.cost)lines.push('','EARLIER SAVED RECORDS (unchanged text, separate from calculated estimates)','Schedule: '+(plan.records.schedule||'Not recorded'),'Cost: '+(plan.records.cost||'Not recorded'));
+ if(plan.removedHybrid)lines.push('An earlier combined Solar + Storage entry was removed. Solar and Battery Storage are separate choices.');
+ lines.push('','TARGET CREDIBILITY',CHOICES.feasibility.options.find(o=>o.id===plan.feasibility)?.label??'Not selected');
+ if(plan.feasibility==='conditional')lines.push('Key condition: '+(plan.condition.trim()||'Not provided'));
+ lines.push('','CALCULATION BASIS','MW totals use the entered total when supplied; otherwise count × MW for each AI level. Editing a combination returns that side to its calculated total.',
+ 'Known technology ranges retain the course values. Tidal Basin and Oil/Petroleum use learner-entered assessment values; no preset range was supplied. Missing values are identified, not treated as zero.',
+ 'Energy costs sum quantity × unit cost as an indicative scenario. Energy schedules use the longest selected range, assuming overlapping work. Batteries are separate from generation. Energy timing and AI readiness timing are assessed separately.');
+ return lines.join('\n');
 }
-async function copySummary(){
-  clearCopy();const token=copyRequest,text=responseSummaryText();
-  try{await navigator.clipboard.writeText(text);if(token===copyRequest)$('copy-status').textContent='Summary of responses copied. Paste it into ThingLink or your document.';}
-  catch{if(token!==copyRequest)return;$('copy-text').value=text;$('copy-fallback').hidden=false;$('copy-text').focus();$('copy-text').select();$('copy-status').textContent='Automatic copying is unavailable. Your summary is selected below for manual copying.';}
-}
-function printHTML(){
-  const plan=current(),prior=calculate(plan.ai,plan.quantities),revised=calculate(plan.revisedAI,plan.revisedQuantities);
-  const cell=(title,lines)=>'<section><h2>'+title+'</h2>'+lines.map(line=>'<p>'+esc(line)+'</p>').join('')+'</section>';
-  return '<header class="print-heading"><p class="print-kicker">AI READINESS / COURSE SIMULATION</p><h1>The 2030 Acceleration Challenge</h1><p>'+esc(locationLabel()+': '+(selectedLocation()||'Not selected'))+'</p><p>New target: December 31, 2030 · Simulation start: January 2027</p></header><p class="print-status">'+(complete()?'Recommendation for review':'Draft responses')+'</p>'+(errors.length?'<p class="print-small">Invalid numeric edits excluded; last valid numeric inputs used. '+esc(errors.join(' '))+'</p>':'')+'<table class="comparison-print"><caption>Earlier decisions and revised 2030 choices</caption><thead><tr><th scope="col">Earlier decisions</th><th scope="col">Revised for 2030</th></tr></thead><tbody><tr><td>'+esc(plan.entered?aiText(prior)+' = '+n(prior.demand.totalMW)+' MW':'Earlier inputs not yet entered')+'<br>'+esc('Final schedule (entered): '+(plan.schedule||'Not provided'))+'<br>'+esc('Final cost (entered): '+(plan.cost||'Not provided'))+'</td><td>'+esc(eligibleAI.length?aiText(revised):'No new AI level fits the full four-year course horizon. Low: 5–10 years; Medium: 10–15 years; High: 15–20 years.')+'</td></tr></tbody></table>'+cell('Earlier energy mix',[...energyLines(prior),...totalsLines(prior)])+cell('Energy options selected for 2030',[...energyLines(revised),...totalsLines(revised)])+cell('Judgment about the target',[CHOICES.feasibility.options.find(o=>o.id===plan.feasibility)?.advice??'Not selected',...(plan.feasibility==='conditional'?['Key condition: '+(plan.condition||'Not provided')]:[])])+cell('Course basis',['Only full course schedules of four years or less are selectable for 2030. Small modular reactor: 4–7 years; its 2027 design milestone is hypothetical. Energy timing does not shorten AI readiness horizons.','MW is rated power, not dependable output. Storage and unsplit solar/storage are not added to generation. Investment sums are indicative scenarios, not established linear scaling. Schedules use the longest selected range, assuming overlap. Entered final cost and schedule are records, separate from calculated energy ranges. No location-specific forecast or annual electricity cost is provided.']);
-}
+async function copySummary(){clearCopy();const request=copyRequest,text=responseSummaryText();try{await navigator.clipboard.writeText(text);if(request===copyRequest)$('copy-status').textContent='Summary of responses copied. Paste it into ThingLink or your document.';}catch{if(request!==copyRequest)return;$('copy-text').value=text;$('copy-fallback').hidden=false;$('copy-text').focus();$('copy-text').select();$('copy-status').textContent='Your summary is selected below for manual copying.';}}
+function printHTML(){return '<header class="print-heading"><h1>The 2030 Acceleration Challenge</h1></header><div class="print-response">'+responseSummaryText().split('\n').map(line=>line?'<p>'+esc(line)+'</p>':'<br>').join('')+'</div>';}
 load();
 $('feasibility-options').innerHTML=CHOICES.feasibility.options.map(o=>`<label class="choice-card" id="card-feasibility-${o.id}" for="feasibility-${o.id}"><input id="feasibility-${o.id}" type="radio" name="feasibility" value="${o.id}" data-choice="feasibility"><span><strong>${esc(o.label)}</strong><small>${esc(o.hint)}</small></span></label>`).join('');
 sync();
-document.addEventListener('input',event=>{
-  const field=event.target;
-  if(field.id==='copy-text')return;
-  clearCopy();
-  if(field.dataset.number){$('filter-status').textContent='';readNumbers(field.dataset.side==='prior');return;}
-  const key={'prior-schedule':'schedule','prior-cost':'cost','condition':'condition'}[field.id];
-  if(key){current()[key]=field.value.slice(0,key==='condition'?240:120);if(key!=='condition')current().entered=true;save();renderResults();}
-});
+document.addEventListener('input',event=>{const field=event.target;if(field.id==='copy-text')return;clearCopy();if(field.dataset.number){readNumbers(field);return;}if(field.id==='condition'){current().condition=field.value.slice(0,240);save();}});
 document.addEventListener('change',event=>{
-  const field=event.target;if(field.id==='copy-text')return;clearCopy();
-  if(field.id==='scope'||field.id==='location'){
-    const discarded=errors.length;
-    if(field.id==='scope'){if(!APP_CONFIG.student||!['state','country'].includes(field.value))return;draft.scope=field.value;}
-    else{if(field.value!==''&&!listFor(draft.scope).includes(field.value))return;draft.locations[draft.scope]=field.value;if(!Object.hasOwn(draft.cases[draft.scope],field.value))draft.cases[draft.scope][field.value]=freshCase();}
-    sync();save();$('activity-status').textContent=(discarded?'Unfinished invalid edits were not saved. ':'')+'Comparison shown for '+(selectedLocation()||'an unselected location')+'. Each location has its own entries.';return;
-  }
-  if(field.dataset.picker){const side=field.dataset.picker,index=Number(field.value);if(field.value===''||!Number.isInteger(index)||!COURSE_DATA.technologies[index]||(side==='revised'&&!eligible(COURSE_DATA.technologies[index])))return;if(!readNumbers(side==='prior'))return;current()[side==='prior'?'quantities':'revisedQuantities'][index]=1;$('filter-status').textContent='';buildEnergy(side);renderResults();save();$(side+'-tech-'+index).focus();return;}
-  if(field.dataset.number){$('filter-status').textContent='';readNumbers(field.dataset.side==='prior');return;}
-  if(field.dataset.choice&&CHOICES.feasibility.options.some(o=>o.id===field.value)){current().feasibility=field.value;renderChoices();save();}
+ const field=event.target;if(field.id==='copy-text')return;clearCopy();
+ if(field.id==='scope'||field.id==='location'){
+  if(field.id==='scope'){if(!APP_CONFIG.student||!['country','state'].includes(field.value))return;draft.scope=field.value;}
+  else{if(field.value!==''&&!listFor(draft.scope).includes(field.value))return;draft.locations[draft.scope]=field.value;if(!Object.hasOwn(draft.cases[draft.scope],field.value))draft.cases[draft.scope][field.value]=freshCase();}
+  sync();save();return;
+ }
+ if(field.dataset.number){if(readNumbers(field)&&field.dataset.number==='technology')buildEnergy(field.dataset.side);return;}
+ if(field.dataset.picker){const side=field.dataset.picker,tech=byId.get(field.value);if(!tech||!readNumbers())return;const actual=getTechnology(current(),tech);if(side==='revised'&&actual.maxYears!==null&&!fits(current(),tech))return;current()[side==='prior'?'quantities':'revisedQuantities'][tech.id]=1;buildEnergy(side);renderResults();save();if(tech.custom){$('custom-values').open=true;$('custom-'+tech.id+'-mw').focus();}else $(side+'-tech-'+tech.id).focus();return;}
+ if(field.dataset.choice&&CHOICES.feasibility.options.some(o=>o.id===field.value)){current().feasibility=field.value;renderChoices();save();}
 });
 document.addEventListener('click',event=>{
-  const field=event.target.closest('[data-remove]');if(!field)return;const side=field.dataset.side;if(!readNumbers(side==='prior'))return;clearCopy();$('filter-status').textContent='';current()[side==='prior'?'quantities':'revisedQuantities'][Number(field.dataset.remove)]=0;buildEnergy(side);renderResults();save();$(side+'-picker').focus();
+ const remove=event.target.closest('[data-remove]');if(remove&&readNumbers()){clearCopy();current()[remove.dataset.side==='prior'?'quantities':'revisedQuantities'][remove.dataset.remove]=0;buildEnergy(remove.dataset.side);renderResults();save();$(remove.dataset.side+'-picker').focus();}
+ const use=event.target.closest('[data-use-combination]');if(use){const side=use.dataset.useCombination,field=$(side+'-counter'),previous=field.value;field.value='';if(!readNumbers()){field.value=previous;return;}clearCopy();current().override[side]=null;current()[side==='prior'?'entered':'revisedEntered']=true;renderResults();save();}
 });
-$('use-earlier').addEventListener('click',()=>{
-  if(!readNumbers())return;clearCopy();const plan=current();plan.revisedQuantities=plan.quantities.map((q,i)=>eligible(COURSE_DATA.technologies[i])?q:0);
-  const excluded=COURSE_DATA.technologies.filter((tech,i)=>plan.quantities[i]>0&&!eligible(tech));
-  $('filter-status').textContent=(plan.revisedQuantities.some(q=>q>0)?'Earlier technologies that fit the full four-year window are shown on the right.':'No earlier energy technologies fit the full four-year window.')+(excluded.length?' Excluded: '+excluded.map(t=>t.name).join('; ')+'.':'');buildEnergy('revised');renderResults();save();
-});
+$('use-earlier-ai').addEventListener('click',()=>{if(!readNumbers())return;clearCopy();current().revisedAI=clone(current().ai);current().override.revised=current().override.prior;current().revisedEntered=current().entered;sync();save();});
+$('use-earlier').addEventListener('click',()=>{if(!readNumbers())return;clearCopy();for(const tech of technologies)current().revisedQuantities[tech.id]=fits(current(),tech)?current().quantities[tech.id]:0;$('filter-status').textContent='Copied the earlier technologies whose schedules fit the four-year window.';buildEnergy('revised');renderResults();save();});
 for(const id of ['copy-summary','copy-summary-bottom'])$(id).addEventListener('click',copySummary);
 $('copy-text').addEventListener('click',event=>event.target.select());
-$('print-button').addEventListener('click',()=>{$('print-report').innerHTML=printHTML();try{window.print();}catch{$('activity-status').textContent='Printing could not open here. Use your browser’s Print command.';}});
+$('print-button').addEventListener('click',()=>{$('print-report').innerHTML=printHTML();try{window.print();}catch{$('activity-status').textContent='Use your browser’s Print command to save a PDF.';}});
 window.addEventListener('beforeprint',()=>{$('print-report').innerHTML=printHTML();});
 $('challenge-form').addEventListener('submit',event=>event.preventDefault());
 $('reset-button').addEventListener('click',()=>{$('reset-dialog').showModal();$('cancel-reset').focus();});
 $('cancel-reset').addEventListener('click',()=>{$('reset-dialog').close();$('reset-button').focus();});
-$('confirm-reset').addEventListener('click',()=>{clearCopy();draft.cases[draft.scope][selectedLocation()]=freshCase();sync();save();$('print-report').replaceChildren();$('reset-dialog').close();$('reset-button').focus();$('activity-status').textContent='Current comparison reset. Other saved locations remain available.';});
+$('confirm-reset').addEventListener('click',()=>{draft.cases[draft.scope][selectedLocation()]=freshCase();sync();save();$('print-report').replaceChildren();$('reset-dialog').close();$('reset-button').focus();});
 </script>
 </body>
 </html>
