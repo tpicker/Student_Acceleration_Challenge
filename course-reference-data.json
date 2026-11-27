@@ -110,6 +110,19 @@
       "legacyIndex": 5
     },
     {
+      "name": "Solar + Storage",
+      "size": "100-500 MW",
+      "minMW": 100,
+      "maxMW": 500,
+      "minCost": 200,
+      "maxCost": 2500,
+      "minYears": 1,
+      "maxYears": 3,
+      "kind": "hybrid",
+      "id": "solar-storage",
+      "legacyIndex": 6
+    },
+    {
       "name": "Onshore Wind",
       "size": "100-300 MW",
       "minMW": 100,
